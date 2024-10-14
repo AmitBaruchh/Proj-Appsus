@@ -1,16 +1,17 @@
 header {
-    background: lightcyan;
+    background: #d9e5fa;
     border-bottom: 2px solid white;
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 20px 10px;
+    margin-bottom: 10px;
 }
 
 nav a {
-    margin: .5em;
+    margin: 0.5em;
 }
 
 nav a:active {
