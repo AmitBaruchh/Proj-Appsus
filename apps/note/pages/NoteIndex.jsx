@@ -1,5 +1,6 @@
 import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
+import { AddTxtNote } from '../cmps/AddTxtNote.jsx'
 
 const { useState, useEffect } = React
 
@@ -19,9 +20,16 @@ export function NoteIndex() {
             })
     }
 
+    function onAddNote(newNote) {
+        noteService.save(newNote).then(() => {
+            loadNotes()
+        })
+    }
+
     if (!notes) return <div>Loading...</div>
     return (
         <section className="note-index">
+            <AddTxtNote onAddNote={onAddNote} />
             <NoteList notes={notes} />
         </section>
     )
