@@ -1,6 +1,7 @@
 const { useEffect, useState } = React
 
 import { MailList } from "../cmps/MailList.jsx"
+import { MailCompose } from "../cmps/MailCompose.jsx"
 import { mailService } from "../services/mail.service.js"
 
 export function MailIndex() {
@@ -8,12 +9,10 @@ export function MailIndex() {
     const [emails, setEmails] = useState(null)
 
     useEffect(() => {
-        console.log('effect')
         loadMails()
-    }, [emails])
+    }, [])
 
     function loadMails() {
-        // console.log('loadMails..')
         mailService.query()
             .then(setEmails)
             .catch(err => {
@@ -24,25 +23,31 @@ export function MailIndex() {
     function onRemoveMail(mailId) {
         mailService.remove(mailId)
             .then(() => {
-                setCars(mails => mails.filter(mail => mail.id !== mailId))
+                setEmails(mails => mails.filter(mail => mail.id !== mailId))
             })
             .catch(err => {
                 console.log('Problems removing mail:', err)
             })
     }
 
+
+
     // function onSetFilterBy(filterBy) {
     //     setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
     // }
 
 
-    if (!emails) return <div>Loading...</div>
+    if (!emails || !emails.length) return <div>Loading...</div>
     return (<section className="mail-index">
+        <table>
+            <MailCompose />
 
-        <MailList
-            emails={emails}
-            onRemoveMail={onRemoveMail}
-        />
+            <MailList
+                emails={emails}
+                onRemoveMail={onRemoveMail}
+            />
+        </table>
+
 
     </section>)
 }
