@@ -1,0 +1,26 @@
+/* note preview */
+
+.note-preview {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    max-width: 400px;
+    transition: box-shadow 0.3s ease;
+}
+
+.note-preview:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.note-preview img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.note-preview p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
