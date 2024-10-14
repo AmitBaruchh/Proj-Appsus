@@ -24,3 +24,12 @@
     font-size: 16px;
     color: #333;
 }
+
+.remove-button {
+    border: none;
+    color: black;
+    background-color: inherit;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+}

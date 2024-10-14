@@ -26,11 +26,23 @@ export function NoteIndex() {
         })
     }
 
+    function onRemoveNote(note) {
+        const noteId = note.id
+        noteService
+            .remove(noteId)
+            .then(() => {
+                setNotes(notes => notes.filter(note => note.id !== noteId))
+            })
+            .catch(err => {
+                console.log('Problems removing note:', err)
+            })
+    }
+
     if (!notes) return <div>Loading...</div>
     return (
         <section className="note-index">
             <AddTxtNote onAddNote={onAddNote} />
-            <NoteList notes={notes} />
+            <NoteList notes={notes} onRemoveNote={onRemoveNote} />
         </section>
     )
 }
