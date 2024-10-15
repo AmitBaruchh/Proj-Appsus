@@ -27,7 +27,10 @@ export function NoteFilter({ onSetFilter, filterBy }) {
     return (
         <section className="note-filter">
             <form>
-                <label htmlFor="search">Search</label>
+                <span className="material-symbols-outlined pin-note-btn" onClick={() => onTogglePinNote(note)}>
+                    search
+                </span>
+                <label htmlFor="search"></label>
                 <input
                     onChange={handleChange}
                     value={filterByToEdit.search || ''}

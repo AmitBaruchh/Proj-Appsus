@@ -71,7 +71,7 @@ export function NoteIndex() {
         <section className="note-index">
             <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
             <AddNote onAddNote={onAddNote} />
-            <h3>PINNED</h3>
+            <h3 className="note-section-title">PINNED</h3>
             <NoteList
                 notes={pinnedNotes}
                 onRemoveNote={onRemoveNote}
@@ -80,7 +80,7 @@ export function NoteIndex() {
                 onTogglePinNote={onTogglePinNote}
             />
 
-            <h3>OTHERS</h3>
+            <h3 className="note-section-title">OTHERS</h3>
             <NoteList
                 notes={unpinnedNotes}
                 onRemoveNote={onRemoveNote}

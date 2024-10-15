@@ -5,10 +5,14 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.616);
-    padding: 16px;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
+    letter-spacing: 0.0142857143em;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
 }
 
 .note-input-wrapper {
