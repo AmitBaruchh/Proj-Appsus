@@ -1,21 +1,21 @@
 import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
-import { AddTxtNote } from '../cmps/AddTxtNote.jsx'
-import { AddTodoNote } from '../cmps/AddTodoNote.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx'
 
 const { useState, useEffect } = React
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState(null)
+    const [notes, setNotes] = useState([])
+    const [filterBy, setFilterBy] = useState('')
 
     useEffect(() => {
         loadNotes()
-    }, [notes])
+    }, [filterBy])
 
     function loadNotes() {
         noteService
-            .query()
+            .query(filterBy)
             .then(setNotes)
             .catch(err => {
                 console.log('err', err)
@@ -59,12 +59,17 @@ export function NoteIndex() {
         noteService.save(updatedNote).catch(err => console.log('Problems saving note with pin toggle:', err))
     }
 
+    function onSetFilter(filterByToEdit) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterByToEdit }))
+    }
+
     if (!notes) return <div>Loading...</div>
 
     const pinnedNotes = notes.filter(note => note.isPinned)
     const unpinnedNotes = notes.filter(note => !note.isPinned)
     return (
         <section className="note-index">
+            <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
             <AddNote onAddNote={onAddNote} />
             <h3>PINNED</h3>
             <NoteList

@@ -14,8 +14,19 @@ export const noteService = {
     save, //* Update/Create
 }
 
-function query() {
-    return storageService.query(NOTE_DB)
+function query(filterBy = {}) {
+    return storageService.query(NOTE_DB).then(notes => {
+        if (filterBy.search) {
+            const regExp = new RegExp(filterBy.search, 'i')
+            notes = notes.filter(
+                note =>
+                    regExp.test(note.info.title || '') ||
+                    regExp.test(note.info.txt || '') ||
+                    (note.info.todos && note.info.todos.some(todo => regExp.test(todo.txt)))
+            )
+        }
+        return notes
+    })
 }
 
 function get(noteId) {
