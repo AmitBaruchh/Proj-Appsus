@@ -121,6 +121,19 @@ function _createNotes() {
                              Love you so much! 🎉🎂`,
                 },
             },
+            {
+                id: 'n107',
+                createdAt: 1112228,
+                type: 'NoteVideo',
+                isPinned: false,
+                info: {
+                    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+                    title: 'My video note',
+                },
+                style: {
+                    backgroundColor: '#00d',
+                },
+            },
         ]
 
         saveToStorage(NOTE_DB, notes)

@@ -20,6 +20,8 @@ function DynamicCmp(props) {
             return <NoteImg {...props} />
         case 'NoteTodos':
             return <NoteTodos {...props} />
+        case 'NoteVideo':
+            return <NoteVideo {...props} />
         default:
             return null
     }
@@ -56,6 +58,18 @@ function NoteTodos({ note }) {
                     </li>
                 ))}
             </ul>
+        </div>
+    )
+}
+
+function NoteVideo({ note }) {
+    return (
+        <div>
+            {note.info.title && <h3>{note.info.title}</h3>}
+            <video width="320" height="240" controls>
+                <source src={note.info.url} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
         </div>
     )
 }
