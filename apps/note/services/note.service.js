@@ -11,7 +11,7 @@ export const noteService = {
     query, //* List
     get, //* Read
     remove, //* Delete
-    save, //* Update/Create = f
+    save, //* Update/Create
 }
 
 function query() {

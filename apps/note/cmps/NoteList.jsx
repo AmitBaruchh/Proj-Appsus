@@ -1,6 +1,6 @@
 import { NotePreview } from '../cmps/NotePreview.jsx'
 
-export function NoteList({ notes, onRemoveNote, onDuplicateNote, onChangeBgnColorNote }) {
+export function NoteList({ notes, onRemoveNote, onDuplicateNote, onChangeBgnColorNote, onTogglePinNote }) {
     if (!notes) return <div>Loading...</div>
     return (
         <ul className="note-list">
@@ -11,6 +11,7 @@ export function NoteList({ notes, onRemoveNote, onDuplicateNote, onChangeBgnColo
                         onRemoveNote={onRemoveNote}
                         onDuplicateNote={onDuplicateNote}
                         onChangeBgnColorNote={onChangeBgnColorNote}
+                        onTogglePinNote={onTogglePinNote}
                     />
                 </li>
             ))}

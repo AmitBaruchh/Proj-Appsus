@@ -53,17 +53,35 @@ export function NoteIndex() {
         noteService.save(updatedNote).catch(err => console.log('Problems saving note with new background color:', err))
     }
 
+    function onTogglePinNote(note) {
+        const updatedNote = { ...note, isPinned: !note.isPinned }
+        setNotes(prevNotes => prevNotes.map(currNote => (currNote.id === note.id ? updatedNote : currNote)))
+        noteService.save(updatedNote).catch(err => console.log('Problems saving note with pin toggle:', err))
+    }
+
     if (!notes) return <div>Loading...</div>
+
+    const pinnedNotes = notes.filter(note => note.isPinned)
+    const unpinnedNotes = notes.filter(note => !note.isPinned)
     return (
         <section className="note-index">
-            {/* <AddTxtNote onAddNote={onAddNote} />
-            <AddTodoNote onAddNote={onAddNote} /> */}
             <AddNote onAddNote={onAddNote} />
+            <h3>PINNED</h3>
             <NoteList
-                notes={notes}
+                notes={pinnedNotes}
                 onRemoveNote={onRemoveNote}
                 onDuplicateNote={onDuplicateNote}
                 onChangeBgnColorNote={onChangeBgnColorNote}
+                onTogglePinNote={onTogglePinNote}
+            />
+
+            <h3>OTHERS</h3>
+            <NoteList
+                notes={unpinnedNotes}
+                onRemoveNote={onRemoveNote}
+                onDuplicateNote={onDuplicateNote}
+                onChangeBgnColorNote={onChangeBgnColorNote}
+                onTogglePinNote={onTogglePinNote}
             />
         </section>
     )

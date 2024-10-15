@@ -1,6 +1,6 @@
 const { useState } = React
 
-export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnColorNote }) {
+export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnColorNote, onTogglePinNote }) {
     let bgColor = 'white'
     if (note.style) bgColor = note.style.backgroundColor
 
@@ -14,9 +14,9 @@ export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnCo
             <DynamicCmp note={note} />
 
             <section className="action-btns">
-                {/* <span className="material-symbols-outlined pin-note-btn" onClick={() => onPinNote(note)}>
+                <span className="material-symbols-outlined pin-note-btn" onClick={() => onTogglePinNote(note)}>
                     keep
-                </span> */}
+                </span>
                 <span className="material-icons-outlined remove-note-btn" onClick={() => onRemoveNote(note)}>
                     delete
                 </span>
