@@ -6,6 +6,8 @@ export function AddNote({ onAddNote }) {
     const [noteTitle, setNoteTitle] = useState('')
     const [noteTxt, setNoteTxt] = useState('')
     const [todos, setTodos] = useState([''])
+    const [noteImgUrl, setNoteImgUrl] = useState('')
+    const [noteVideoUrl, setNoteVideoUrl] = useState('')
 
     function handleTxtInputChange(ev) {
         setNoteTxt(ev.target.value)
@@ -18,6 +20,16 @@ export function AddNote({ onAddNote }) {
     function handleAddTodo() {
         setIsExpanded(true)
         setNoteType('NoteTodos')
+    }
+
+    function handleAddImg() {
+        setIsExpanded(true)
+        setNoteType('NoteImg')
+    }
+
+    function handleAddVideo() {
+        setIsExpanded(true)
+        setNoteType('NoteVideo')
     }
 
     function handleExpand() {
@@ -33,10 +45,24 @@ export function AddNote({ onAddNote }) {
         }
     }
 
+    function handleImgUrlChange(ev) {
+        setNoteImgUrl(ev.target.value)
+    }
+
+    function handleVideoUrlChange(ev) {
+        setNoteVideoUrl(ev.target.value)
+    }
+
     function handleSubmit(ev) {
         ev.preventDefault()
 
-        if (!noteTitle.trim() && !noteTxt.trim() && todos.every(todo => !todo.trim())) {
+        if (
+            !noteTitle.trim() &&
+            !noteTxt.trim() &&
+            todos.every(todo => !todo.trim()) &&
+            !noteImgUrl.trim() &&
+            !noteVideoUrl.trim()
+        ) {
             setIsExpanded(false)
             setNoteTitle('')
             setNoteTxt('')
@@ -49,10 +75,14 @@ export function AddNote({ onAddNote }) {
             info:
                 noteType === 'NoteTxt'
                     ? { title: noteTitle, txt: noteTxt }
-                    : {
+                    : noteType === 'NoteTodos'
+                    ? {
                           title: noteTitle,
                           todos: todos.filter(todo => todo.trim()).map(todo => ({ txt: todo, doneAt: null })),
-                      },
+                      }
+                    : noteType === 'NoteImg'
+                    ? { title: noteTitle, url: noteImgUrl }
+                    : { title: noteTitle, url: noteVideoUrl },
         }
         onAddNote(newNote)
         setNoteTitle('')
@@ -75,6 +105,12 @@ export function AddNote({ onAddNote }) {
 
                     <span className="material-icons-outlined todo-list-btn" onClick={handleAddTodo}>
                         check_box
+                    </span>
+                    <span className="material-icons-outlined img-note-btn" onClick={handleAddImg}>
+                        <span class="material-symbols-outlined">image</span>
+                    </span>
+                    <span className="material-icons-outlined video-note-btn" onClick={handleAddVideo}>
+                        videocam
                     </span>
                 </div>
             )}
@@ -109,6 +145,24 @@ export function AddNote({ onAddNote }) {
                                 </li>
                             ))}
                         </ul>
+                    )}
+                    {noteType === 'NoteImg' && (
+                        <input
+                            type="text"
+                            placeholder="Enter image URL..."
+                            value={noteVideoUrl}
+                            onChange={handleImgUrlChange}
+                            className="note-img-url-input"
+                        />
+                    )}
+                    {noteType === 'NoteVideo' && (
+                        <input
+                            type="text"
+                            placeholder="Enter video URL..."
+                            value={noteVideoUrl}
+                            onChange={handleVideoUrlChange}
+                            className="note-video-url-input"
+                        />
                     )}
                     <div className="close-btn-container">
                         <button className="close-new-note-btn" type="submit">

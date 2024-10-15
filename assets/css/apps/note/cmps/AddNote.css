@@ -28,11 +28,6 @@
     box-sizing: border-box;
 }
 
-.note-input-collapsed:focus {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
 .material-icons-outlined {
     cursor: pointer;
     padding: 8px;
@@ -54,7 +49,9 @@
     border-radius: 8px;
 }
 
-.note-text-input {
+.note-text-input,
+.note-img-url-input,
+.note-video-url-input {
     width: 100%;
     padding: 8px;
     font-size: 16px;

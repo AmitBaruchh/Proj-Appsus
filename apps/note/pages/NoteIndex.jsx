@@ -52,6 +52,6 @@ export function NoteIndex() {
             <AddTodoNote onAddNote={onAddNote} /> */}
             <AddNote onAddNote={onAddNote} />
             <NoteList notes={notes} onRemoveNote={onRemoveNote} onDuplicateNote={onDuplicateNote} />
-        </section>
+           </section>
     )
 }

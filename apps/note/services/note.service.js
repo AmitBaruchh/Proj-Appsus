@@ -127,8 +127,8 @@ function _createNotes() {
                 type: 'NoteVideo',
                 isPinned: false,
                 info: {
-                    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
                     title: 'My video note',
+                    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
                 },
                 style: {
                     backgroundColor: '#00d',
