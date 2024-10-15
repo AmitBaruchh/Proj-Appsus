@@ -45,13 +45,26 @@ export function NoteIndex() {
         onAddNote(duplicatedNote)
     }
 
+    function onChangeBgnColorNote(note, newColor) {
+        const updatedNote = { ...note, style: { ...note.style, backgroundColor: newColor } }
+
+        setNotes(prevNotes => prevNotes.map(currNote => (currNote.id === note.id ? updatedNote : currNote)))
+
+        noteService.save(updatedNote).catch(err => console.log('Problems saving note with new background color:', err))
+    }
+
     if (!notes) return <div>Loading...</div>
     return (
         <section className="note-index">
             {/* <AddTxtNote onAddNote={onAddNote} />
             <AddTodoNote onAddNote={onAddNote} /> */}
             <AddNote onAddNote={onAddNote} />
-            <NoteList notes={notes} onRemoveNote={onRemoveNote} onDuplicateNote={onDuplicateNote} />
-           </section>
+            <NoteList
+                notes={notes}
+                onRemoveNote={onRemoveNote}
+                onDuplicateNote={onDuplicateNote}
+                onChangeBgnColorNote={onChangeBgnColorNote}
+            />
+        </section>
     )
 }

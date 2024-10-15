@@ -25,11 +25,30 @@
     color: #333;
 }
 
-.remove-note-btn,
-.duplicate-note-btn {
+.note-preview .action-btns {
+    opacity: 0;
     border: none;
     background-color: inherit;
     font-size: 26px;
     font-weight: bold;
     cursor: pointer;
+    position: relative;
+}
+
+.material-symbols-outlined.pin-note-btn {
+    font-variation-settings: 'FILL' 1;
+    /* color: blue; */
+}
+.note-preview:hover .action-btns {
+    opacity: 1;
+}
+
+.bgn-color-note-btn {
+    cursor: pointer;
+}
+
+.fillColor {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

@@ -102,16 +102,17 @@ export function AddNote({ onAddNote }) {
                         onClick={handleExpand}
                         className="note-input-collapsed"
                     />
-
-                    <span className="material-icons-outlined todo-list-btn" onClick={handleAddTodo}>
-                        check_box
-                    </span>
-                    <span className="material-icons-outlined img-note-btn" onClick={handleAddImg}>
-                        <span class="material-symbols-outlined">image</span>
-                    </span>
-                    <span className="material-icons-outlined video-note-btn" onClick={handleAddVideo}>
-                        videocam
-                    </span>
+                    <section className="add-note-btns">
+                        <span className="material-icons-outlined todo-list-btn" onClick={handleAddTodo}>
+                            check_box
+                        </span>
+                        <span className="material-icons-outlined img-note-btn" onClick={handleAddImg}>
+                            image
+                        </span>
+                        <span className="material-icons-outlined video-note-btn" onClick={handleAddVideo}>
+                            videocam
+                        </span>
+                    </section>
                 </div>
             )}
             {isExpanded && (

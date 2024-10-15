@@ -44,7 +44,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 style: {
-                    backgroundColor: '#00d',
+                    backgroundColor: '#A2D2DF',
                 },
                 info: {
                     txt: 'Fullstack Me Baby!',
@@ -112,7 +112,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 style: {
-                    backgroundColor: '#00d',
+                    backgroundColor: '#CBD2A4',
                 },
                 info: {
                     title: 'Happy Birthday Dad!',
@@ -131,7 +131,7 @@ function _createNotes() {
                     url: 'https://www.w3schools.com/html/mov_bbb.mp4',
                 },
                 style: {
-                    backgroundColor: '#00d',
+                    backgroundColor: '#FFE3E3',
                 },
             },
         ]

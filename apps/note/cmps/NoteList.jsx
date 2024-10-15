@@ -1,12 +1,17 @@
 import { NotePreview } from '../cmps/NotePreview.jsx'
 
-export function NoteList({ notes, onRemoveNote, onDuplicateNote }) {
+export function NoteList({ notes, onRemoveNote, onDuplicateNote, onChangeBgnColorNote }) {
     if (!notes) return <div>Loading...</div>
     return (
         <ul className="note-list">
             {notes.map(note => (
                 <li key={note.id}>
-                    <NotePreview note={note} onRemoveNote={onRemoveNote} onDuplicateNote={onDuplicateNote} />
+                    <NotePreview
+                        note={note}
+                        onRemoveNote={onRemoveNote}
+                        onDuplicateNote={onDuplicateNote}
+                        onChangeBgnColorNote={onChangeBgnColorNote}
+                    />
                 </li>
             ))}
         </ul>

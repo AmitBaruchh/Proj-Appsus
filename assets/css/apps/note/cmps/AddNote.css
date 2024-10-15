@@ -28,13 +28,18 @@
     box-sizing: border-box;
 }
 
-.material-icons-outlined {
+.add-note-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.add-note-btns .material-icons-outlined {
     cursor: pointer;
     padding: 8px;
     color: #5f6368;
 }
 
-.material-icons-outlined:hover {
+.add-note-btns .material-icons-outlined:hover {
     color: #202124;
 }
 
@@ -80,12 +85,6 @@
     border: none;
     padding: 10px 12px;
     font-size: 16px;
-}
-
-.todo-list input:focus {
-    outline: none;
-    border-top: 1px solid #d9d9d9;
-    border-bottom: 1px solid #d9d9d9;
 }
 
 .todo-list-btn {
