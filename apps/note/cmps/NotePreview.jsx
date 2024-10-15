@@ -17,11 +17,18 @@ function DynamicCmp(props) {
             return <NoteImg {...props} />
         case 'NoteTodos':
             return <NoteTodos {...props} />
+        default:
+            return null
     }
 }
 
 function NoteTxt({ note }) {
-    return <p>{note.info.txt}</p>
+    return (
+        <div>
+            {note.info.title && <h3>{note.info.title}</h3>}
+            <p>{note.info.txt}</p>
+        </div>
+    )
 }
 
 function NoteImg({ note }) {
@@ -39,7 +46,10 @@ function NoteTodos({ note }) {
             <h3>{note.info.title}</h3>
             <ul>
                 {note.info.todos.map((todo, idx) => (
-                    <li key={idx}>{todo.txt}</li>
+                    <li key={idx}>
+                        <input type="checkbox" checked={!!todo.doneAt} />
+                        {todo.txt}
+                    </li>
                 ))}
             </ul>
         </div>

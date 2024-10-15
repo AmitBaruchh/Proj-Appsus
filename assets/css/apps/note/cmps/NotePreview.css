@@ -33,3 +33,8 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.material-icons-outlined {
+    color: gray;
+    cursor: pointer;
+}
