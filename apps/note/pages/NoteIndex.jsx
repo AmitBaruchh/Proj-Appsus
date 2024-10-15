@@ -11,7 +11,7 @@ export function NoteIndex() {
 
     useEffect(() => {
         loadNotes()
-    }, [])
+    }, [notes])
 
     function loadNotes() {
         noteService
@@ -23,8 +23,8 @@ export function NoteIndex() {
     }
 
     function onAddNote(newNote) {
-        noteService.save(newNote).then(() => {
-            loadNotes()
+        noteService.save(newNote).then(savedNote => {
+            setNotes(prevNotes => [...prevNotes, savedNote])
         })
     }
 
@@ -40,13 +40,18 @@ export function NoteIndex() {
             })
     }
 
+    function onDuplicateNote(note) {
+        const duplicatedNote = { ...note, id: null, createdAt: Date.now() }
+        onAddNote(duplicatedNote)
+    }
+
     if (!notes) return <div>Loading...</div>
     return (
         <section className="note-index">
             {/* <AddTxtNote onAddNote={onAddNote} />
             <AddTodoNote onAddNote={onAddNote} /> */}
             <AddNote onAddNote={onAddNote} />
-            <NoteList notes={notes} onRemoveNote={onRemoveNote} />
+            <NoteList notes={notes} onRemoveNote={onRemoveNote} onDuplicateNote={onDuplicateNote} />
         </section>
     )
 }

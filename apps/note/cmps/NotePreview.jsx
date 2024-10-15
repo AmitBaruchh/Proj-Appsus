@@ -1,9 +1,12 @@
-export function NotePreview({ note, onRemoveNote }) {
+export function NotePreview({ note, onRemoveNote, onDuplicateNote }) {
     return (
         <article className="note-preview">
             <DynamicCmp note={note} />
-            <button className="remove-button" onClick={() => onRemoveNote(note)}>
+            <button className="remove-note-btn" onClick={() => onRemoveNote(note)}>
                 🗑
+            </button>
+            <button className="duplicate-note-btn" onClick={() => onDuplicateNote(note)}>
+                📄
             </button>
         </article>
     )

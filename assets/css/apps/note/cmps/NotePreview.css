@@ -25,16 +25,11 @@
     color: #333;
 }
 
-.remove-button {
+.remove-note-btn,
+.duplicate-note-btn {
     border: none;
-    color: black;
     background-color: inherit;
     font-size: 26px;
     font-weight: bold;
-    cursor: pointer;
-}
-
-.material-icons-outlined {
-    color: gray;
     cursor: pointer;
 }
