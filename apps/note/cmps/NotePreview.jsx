@@ -34,7 +34,7 @@ function NoteTxt({ note }) {
 function NoteImg({ note }) {
     return (
         <div>
-            <p>{note.info.title}</p>
+            {note.info.title && <h3>{note.info.title}</h3>}
             <img src={note.info.url} alt={note.info.title} />
         </div>
     )
@@ -43,7 +43,8 @@ function NoteImg({ note }) {
 function NoteTodos({ note }) {
     return (
         <div>
-            <h3>{note.info.title}</h3>
+            {note.info.title && <h3>{note.info.title}</h3>}
+
             <ul>
                 {note.info.todos.map((todo, idx) => (
                     <li key={idx}>
