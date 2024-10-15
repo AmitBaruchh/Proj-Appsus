@@ -2,6 +2,7 @@ import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { AddTxtNote } from '../cmps/AddTxtNote.jsx'
 import { AddTodoNote } from '../cmps/AddTodoNote.jsx'
+import { AddNote } from '../cmps/AddNote.jsx'
 
 const { useState, useEffect } = React
 
@@ -42,8 +43,9 @@ export function NoteIndex() {
     if (!notes) return <div>Loading...</div>
     return (
         <section className="note-index">
-            <AddTxtNote onAddNote={onAddNote} />
-            <AddTodoNote onAddNote={onAddNote} />
+            {/* <AddTxtNote onAddNote={onAddNote} />
+            <AddTodoNote onAddNote={onAddNote} /> */}
+            <AddNote onAddNote={onAddNote} />
             <NoteList notes={notes} onRemoveNote={onRemoveNote} />
         </section>
     )

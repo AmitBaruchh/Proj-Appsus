@@ -1,0 +1,125 @@
+.add-note-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.616);
+    padding: 16px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.note-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.note-input-collapsed {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.note-input-collapsed:focus {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.material-icons-outlined {
+    cursor: pointer;
+    padding: 8px;
+    color: #5f6368;
+}
+
+.material-icons-outlined:hover {
+    color: #202124;
+}
+
+.note-title-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.note-text-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.todo-list li {
+    margin-bottom: 10px;
+    display: flex;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.todo-list li input {
+    width: 100%;
+    border: none;
+    padding: 10px 12px;
+    font-size: 16px;
+}
+
+.todo-list input:focus {
+    outline: none;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.todo-list-btn {
+    border: none;
+    background-color: transparent;
+    color: #5f6368;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.todo-list-btn:hover {
+    color: #202124;
+}
+
+.close-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.close-new-note-btn {
+    background-color: inherit;
+    border: none;
+    color: black;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-new-note-btn:hover {
+    background-color: #f5f4f4;
+    color: #202124;
+}
