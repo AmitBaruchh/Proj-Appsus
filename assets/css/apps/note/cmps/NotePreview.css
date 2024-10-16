@@ -6,7 +6,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 10px;
-    max-width: 400px;
+    max-width: 250px;
     transition: box-shadow 0.3s ease;
 }
 
@@ -51,6 +51,14 @@
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.note-preview .todo-note ul {
+    padding-left: 0px;
+}
+
+.note-preview .todo-note li {
+    margin-left: 5px;
 }
 
 @media (max-width: 550px) {
