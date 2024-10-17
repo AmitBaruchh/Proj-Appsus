@@ -11,11 +11,24 @@ export const noteService = {
     query, //* List
     get, //* Read
     remove, //* Delete
-    save, //* Update/Create = f
+    save, //* Update/Create
+    getEmptyNote,
+    getFilterFromSearchParams,
 }
 
-function query() {
-    return storageService.query(NOTE_DB)
+function query(filterBy = {}) {
+    return storageService.query(NOTE_DB).then(notes => {
+        if (filterBy.search) {
+            const regExp = new RegExp(filterBy.search, 'i')
+            notes = notes.filter(
+                note =>
+                    regExp.test(note.info.title || '') ||
+                    regExp.test(note.info.txt || '') ||
+                    (note.info.todos && note.info.todos.some(todo => regExp.test(todo.txt)))
+            )
+        }
+        return notes
+    })
 }
 
 function get(noteId) {
@@ -34,6 +47,23 @@ function save(note) {
     }
 }
 
+function getEmptyNote(title = '', isPinned = false) {
+    return { title, isPinned, createdA: Date.now() }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || defaultFilter[field]
+    }
+    return filterBy
+}
+
+function getDefaultFilter() {
+       return { search: '' }
+}
+
 function _createNotes() {
     let notes = loadFromStorage(NOTE_DB)
     if (!notes || !notes.length) {
@@ -44,7 +74,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 style: {
-                    backgroundColor: '#00d',
+                    backgroundColor: '#A2D2DF',
                 },
                 info: {
                     txt: 'Fullstack Me Baby!',
@@ -80,7 +110,7 @@ function _createNotes() {
                 id: 'n104',
                 createdAt: 1112225,
                 type: 'NoteTodos',
-                isPinned: false,
+                isPinned: true,
                 info: {
                     title: 'Shopping List',
                     todos: [
@@ -110,15 +140,214 @@ function _createNotes() {
                 id: 'n106',
                 createdAt: 1112227,
                 type: 'NoteTxt',
-                isPinned: true,
+                isPinned: false,
                 style: {
-                    backgroundColor: '#00d',
+                    backgroundColor: '#CBD2A4',
                 },
                 info: {
                     title: 'Happy Birthday Dad!',
                     txt: `Dear Dad, 
                             Wishing you the happiest of birthdays! 
                              Love you so much! 🎉🎂`,
+                },
+            },
+            {
+                id: 'n107',
+                createdAt: 1112228,
+                type: 'NoteVideo',
+                isPinned: false,
+                info: {
+                    title: 'My video note',
+                    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+                },
+                style: {
+                    backgroundColor: '#FFE3E3',
+                },
+            },
+            {
+                id: 'n108',
+                createdAt: 1112230,
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#FFCCBC',
+                },
+                info: {
+                    txt: 'Workout Plan',
+                },
+            },
+            {
+                id: 'n109',
+                createdAt: 1112231,
+                type: 'NoteImg',
+                isPinned: false,
+                info: {
+                    url: 'https://www.worldpaintings.co.il/pub/68717/Landscape%20painting/Seascape%20paintings/AF-LA02022.jpg?quality=65&width=&height=&mode=max',
+                    title: 'Sunset at the Beach',
+                },
+                style: {
+                    backgroundColor: '#FFD09B',
+                },
+            },
+            {
+                id: 'n110',
+                createdAt: 1112232,
+                type: 'NoteTodos',
+                isPinned: true,
+                info: {
+                    title: 'Weekend To-do',
+                    todos: [
+                        { txt: 'Clean the house', doneAt: null },
+                        { txt: 'Go grocery shopping', doneAt: null },
+                        { txt: 'Finish coding project', doneAt: 187112000 },
+                    ],
+                },
+                style: {
+                    backgroundColor: '#C8E6C9',
+                },
+            },
+            {
+                id: 'n111',
+                createdAt: 1112233,
+                type: 'NoteTodos',
+                isPinned: false,
+                info: {
+                    title: 'Workout List',
+                    todos: [
+                        { txt: 'Push-ups', doneAt: null },
+                        { txt: 'Squats', doneAt: null },
+                        { txt: 'Lunges', doneAt: null },
+                        { txt: 'Plank', doneAt: null },
+                        { txt: 'Jumping Jacks', doneAt: null },
+                    ],
+                },
+                style: {
+                    backgroundColor: '#FFEB3B',
+                },
+            },
+            {
+                id: 'n112',
+                createdAt: 1112234,
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#E1BEE7',
+                },
+                info: {
+                    txt: 'Reminder: Call Mom',
+                },
+            },
+            {
+                id: 'n113',
+                createdAt: 1112235,
+                type: 'NoteImg',
+                isPinned: false,
+                info: {
+                    url: 'https://plus.unsplash.com/premium_photo-1697809257939-4f9d1b878d1f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW91bnRhaW4lMjBhZHZlbnR1cmV8ZW58MHx8MHx8fDA%3D',
+                    title: 'Mountain Adventure',
+                },
+                style: {
+                    backgroundColor: '#BBDEFB',
+                },
+            },
+            {
+                id: 'n114',
+                createdAt: 1112236,
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#FFAB91',
+                },
+                info: {
+                    title: 'Recommended Restaurants',
+                    txt: [
+                        `1. Pizza Paradise
+                   2. Sushi World 
+                   3. Burger House 
+                   4. Italian Delight
+                   5. Vegan Vibes`,
+                    ],
+                },
+            },
+            {
+                id: 'n115',
+                createdAt: 1112237,
+                type: 'NoteTodos',
+                isPinned: false,
+                info: {
+                    title: 'Things to Pack for Vacation',
+                    todos: [
+                        { txt: 'Passport', doneAt: null },
+                        { txt: 'Sunglasses', doneAt: null },
+                        { txt: 'Sunscreen', doneAt: null },
+                        { txt: 'Beach Towels', doneAt: null },
+                        { txt: 'Travel Guide', doneAt: null },
+                    ],
+                },
+                style: {
+                    backgroundColor: '#80DEEA',
+                },
+            },
+            {
+                id: 'n116',
+                createdAt: 1112238,
+                type: 'NoteImg',
+                isPinned: false,
+                info: {
+                    url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZfKRU9Ty9A7lj9XlLx6IfaWFXX3BpHNagmQ&s',
+                    title: 'Hanging out with friends',
+                },
+                style: {
+                    backgroundColor: '#FFF176',
+                },
+            },
+            {
+                id: 'n117',
+                createdAt: 1112239,
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#FFCDD2',
+                },
+                info: {
+                    title: 'Grocery List',
+                    txt: `- Apples 
+                   - Bananas
+                   - Orange Juice
+                   - Chicken
+                   - Bread`,
+                },
+            },
+            {
+                id: 'n118',
+                createdAt: 1112240,
+                type: 'NoteTodos',
+                isPinned: false,
+                info: {
+                    title: 'Books to Read',
+                    todos: [
+                        { txt: 'To Kill a Mockingbird', doneAt: null },
+                        { txt: '1984 by George Orwell', doneAt: null },
+                        { txt: 'The Great Gatsby', doneAt: null },
+                        { txt: 'Moby Dick', doneAt: null },
+                        { txt: 'War and Peace', doneAt: null },
+                    ],
+                },
+                style: {
+                    backgroundColor: '#FFECB3',
+                },
+            },
+            {
+                id: 'n119',
+                createdAt: 1112241,
+                type: 'NoteImg',
+                isPinned: true,
+                info: {
+                    url: 'https://meet-thelocals.com/wp-content/uploads/2019/10/Eiffel-Tower-view-Paris.jpg',
+                    title: 'Eiffel Tower View',
+                },
+                style: {
+                    backgroundColor: '#B39DDB',
                 },
             },
         ]

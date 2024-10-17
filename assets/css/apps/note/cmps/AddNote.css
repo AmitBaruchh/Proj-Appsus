@@ -5,10 +5,14 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.616);
-    padding: 16px;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
+    letter-spacing: 0.0142857143em;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
 }
 
 .note-input-wrapper {
@@ -28,18 +32,18 @@
     box-sizing: border-box;
 }
 
-.note-input-collapsed:focus {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.add-note-btns {
+    display: flex;
+    gap: 8px;
 }
 
-.material-icons-outlined {
+.add-note-btns .material-icons-outlined {
     cursor: pointer;
     padding: 8px;
     color: #5f6368;
 }
 
-.material-icons-outlined:hover {
+.add-note-btns .material-icons-outlined:hover {
     color: #202124;
 }
 
@@ -54,7 +58,9 @@
     border-radius: 8px;
 }
 
-.note-text-input {
+.note-text-input,
+.note-img-url-input,
+.note-video-url-input {
     width: 100%;
     padding: 8px;
     font-size: 16px;
@@ -83,12 +89,6 @@
     border: none;
     padding: 10px 12px;
     font-size: 16px;
-}
-
-.todo-list input:focus {
-    outline: none;
-    border-top: 1px solid #d9d9d9;
-    border-bottom: 1px solid #d9d9d9;
 }
 
 .todo-list-btn {

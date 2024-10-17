@@ -1,1 +1,26 @@
- /* note index */
+/* note index */
+
+.note-index {
+    font-family: 'Roboto', arial, sans-serif;
+    font-size: 15px;
+}
+
+.note-index .note-section-title {
+    display: block;
+    color: rgb(95, 99, 104);
+    letter-spacing: 0.0727272727em;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1rem;
+    text-transform: uppercase;
+    margin: 32px 32px 8px;
+    padding: 0 6.25em;
+    font-weight: bold;
+}
+
+@media (max-width: 550px) {
+    .note-index .note-section-title {
+        padding: 0 1em;
+    }
+}

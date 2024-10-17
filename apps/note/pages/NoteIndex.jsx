@@ -1,21 +1,28 @@
 import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
-import { AddTxtNote } from '../cmps/AddTxtNote.jsx'
-import { AddTodoNote } from '../cmps/AddTodoNote.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx'
+import { getTruthyValues } from '../../../services/util.service.js'
+
 
 const { useState, useEffect } = React
+const { Outlet, useSearchParams } = ReactRouterDOM
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState(null)
+    const [notes, setNotes] = useState([])
+
+    const [searchParams, setSearchParams] = useSearchParams(true)
+    const defaultFilter = noteService.getFilterFromSearchParams(searchParams)
+    const [filterBy, setFilterBy] = useState(defaultFilter)
 
     useEffect(() => {
+        setSearchParams(getTruthyValues(filterBy))
         loadNotes()
-    }, [notes])
+    }, [filterBy, notes])
 
     function loadNotes() {
         noteService
-            .query()
+            .query(filterBy)
             .then(setNotes)
             .catch(err => {
                 console.log('err', err)
@@ -45,13 +52,50 @@ export function NoteIndex() {
         onAddNote(duplicatedNote)
     }
 
+    function onChangeBgnColorNote(note, newColor) {
+        const updatedNote = { ...note, style: { ...note.style, backgroundColor: newColor } }
+
+        setNotes(prevNotes => prevNotes.map(currNote => (currNote.id === note.id ? updatedNote : currNote)))
+
+        noteService.save(updatedNote).catch(err => console.log('Problems saving note with new background color:', err))
+    }
+
+    function onTogglePinNote(note) {
+        const updatedNote = { ...note, isPinned: !note.isPinned }
+        setNotes(prevNotes => prevNotes.map(currNote => (currNote.id === note.id ? updatedNote : currNote)))
+        noteService.save(updatedNote).catch(err => console.log('Problems saving note with pin toggle:', err))
+    }
+
+    function onSetFilter(filterByToEdit) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterByToEdit }))
+    }
+
     if (!notes) return <div>Loading...</div>
+
+    const pinnedNotes = notes.filter(note => note.isPinned)
+    const unpinnedNotes = notes.filter(note => !note.isPinned)
     return (
         <section className="note-index">
-            {/* <AddTxtNote onAddNote={onAddNote} />
-            <AddTodoNote onAddNote={onAddNote} /> */}
+            <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
             <AddNote onAddNote={onAddNote} />
-            <NoteList notes={notes} onRemoveNote={onRemoveNote} onDuplicateNote={onDuplicateNote} />
+            <h3 className="note-section-title">PINNED</h3>
+            <NoteList
+                notes={pinnedNotes}
+                onRemoveNote={onRemoveNote}
+                onDuplicateNote={onDuplicateNote}
+                onChangeBgnColorNote={onChangeBgnColorNote}
+                onTogglePinNote={onTogglePinNote}
+            />
+
+            <h3 className="note-section-title">OTHERS</h3>
+            <NoteList
+                notes={unpinnedNotes}
+                onRemoveNote={onRemoveNote}
+                onDuplicateNote={onDuplicateNote}
+                onChangeBgnColorNote={onChangeBgnColorNote}
+                onTogglePinNote={onTogglePinNote}
+            />
+            <Outlet />
         </section>
     )
 }
