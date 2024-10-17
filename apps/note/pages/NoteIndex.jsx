@@ -2,16 +2,23 @@ import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
+import { getTruthyValues } from '../../../services/util.service.js'
+
 
 const { useState, useEffect } = React
+const { Outlet, useSearchParams } = ReactRouterDOM
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
-    const [filterBy, setFilterBy] = useState('')
+
+    const [searchParams, setSearchParams] = useSearchParams(true)
+    const defaultFilter = noteService.getFilterFromSearchParams(searchParams)
+    const [filterBy, setFilterBy] = useState(defaultFilter)
 
     useEffect(() => {
+        setSearchParams(getTruthyValues(filterBy))
         loadNotes()
-    }, [filterBy])
+    }, [filterBy, notes])
 
     function loadNotes() {
         noteService
@@ -88,6 +95,7 @@ export function NoteIndex() {
                 onChangeBgnColorNote={onChangeBgnColorNote}
                 onTogglePinNote={onTogglePinNote}
             />
+            <Outlet />
         </section>
     )
 }

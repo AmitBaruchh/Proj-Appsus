@@ -1,3 +1,6 @@
+import { NoteEdit } from '../cmps/NoteEdit.jsx'
+
+const { Link } = ReactRouterDOM
 const { useState } = React
 
 export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnColorNote, onTogglePinNote }) {
@@ -11,7 +14,9 @@ export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnCo
 
     return (
         <article className="note-preview" style={{ backgroundColor: bgColor }}>
-            <DynamicCmp note={note} />
+            <Link to={`/note/edit/${note.id}`}>
+                <DynamicCmp note={note} />
+            </Link>
 
             <section className="action-btns">
                 <span className="material-symbols-outlined pin-note-btn" onClick={() => onTogglePinNote(note)}>

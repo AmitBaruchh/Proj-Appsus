@@ -12,6 +12,8 @@ export const noteService = {
     get, //* Read
     remove, //* Delete
     save, //* Update/Create
+    getEmptyNote,
+    getFilterFromSearchParams,
 }
 
 function query(filterBy = {}) {
@@ -43,6 +45,23 @@ function save(note) {
     } else {
         return storageService.post(NOTE_DB, note)
     }
+}
+
+function getEmptyNote(title = '', isPinned = false) {
+    return { title, isPinned, createdA: Date.now() }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || defaultFilter[field]
+    }
+    return filterBy
+}
+
+function getDefaultFilter() {
+       return { search: '' }
 }
 
 function _createNotes() {
