@@ -1,9 +1,13 @@
-import { NoteEdit } from '../cmps/NoteEdit.jsx'
-
 const { Link } = ReactRouterDOM
-const { useState } = React
 
-export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnColorNote, onTogglePinNote }) {
+export function NotePreview({
+    note,
+    onRemoveNote,
+    onDuplicateNote,
+    onChangeBgnColorNote,
+    onTogglePinNote,
+    onToggleTodo,
+}) {
     let bgColor = 'white'
     if (note.style) bgColor = note.style.backgroundColor
 
@@ -15,7 +19,7 @@ export function NotePreview({ note, onRemoveNote, onDuplicateNote, onChangeBgnCo
     return (
         <article className="note-preview" style={{ backgroundColor: bgColor }}>
             <Link to={`/note/edit/${note.id}`}>
-                <DynamicCmp note={note} />
+                <DynamicCmp note={note} onToggleTodo={onToggleTodo} />
             </Link>
 
             <section className="action-btns">
@@ -78,7 +82,7 @@ function NoteImg({ note }) {
     )
 }
 
-function NoteTodos({ note }) {
+function NoteTodos({ note, onToggleTodo }) {
     return (
         <div className="todo-note">
             {note.info.title && <h3>{note.info.title}</h3>}
@@ -86,7 +90,7 @@ function NoteTodos({ note }) {
             <ul>
                 {note.info.todos.map((todo, idx) => (
                     <li key={idx}>
-                        <input type="checkbox" checked={!!todo.doneAt} />
+                        <input type="checkbox" checked={!!todo.doneAt} onChange={() => onToggleTodo(note, idx)} />
                         {todo.txt}
                     </li>
                 ))}

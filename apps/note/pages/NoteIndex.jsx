@@ -4,7 +4,6 @@ import { AddNote } from '../cmps/AddNote.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { getTruthyValues } from '../../../services/util.service.js'
 
-
 const { useState, useEffect } = React
 const { Outlet, useSearchParams } = ReactRouterDOM
 
@@ -70,6 +69,19 @@ export function NoteIndex() {
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterByToEdit }))
     }
 
+    function onToggleTodo(note, idx) {
+        const updatedTodos = [...note.info.todos]
+        const todo = updatedTodos[idx]
+
+        todo.doneAt = todo.doneAt ? null : Date.now()
+
+        const updatedNote = { ...note, info: { ...note.info, todos: updatedTodos } }
+
+        noteService.save(updatedNote).then(() => {
+            setNotes(prevNotes => prevNotes.map(n => (n.id === updatedNote.id ? updatedNote : n)))
+        })
+    }
+
     if (!notes) return <div>Loading...</div>
 
     const pinnedNotes = notes.filter(note => note.isPinned)
@@ -85,6 +97,7 @@ export function NoteIndex() {
                 onDuplicateNote={onDuplicateNote}
                 onChangeBgnColorNote={onChangeBgnColorNote}
                 onTogglePinNote={onTogglePinNote}
+                onToggleTodo={onToggleTodo}
             />
 
             <h3 className="note-section-title">OTHERS</h3>
@@ -94,6 +107,7 @@ export function NoteIndex() {
                 onDuplicateNote={onDuplicateNote}
                 onChangeBgnColorNote={onChangeBgnColorNote}
                 onTogglePinNote={onTogglePinNote}
+                onToggleTodo={onToggleTodo}
             />
             <Outlet />
         </section>
