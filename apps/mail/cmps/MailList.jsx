@@ -3,17 +3,15 @@ import { MailPreview } from "./MailPreview.jsx";
 export function MailList({ emails, onRemoveMail }) {
 
     return (
-        <tbody className='mail-list'>
+        <table className='mail-table' >
+            <tbody className='mail-list'>
 
-            {emails.map(mail =>
-                <tr key={mail.id}>
-                    <MailPreview mail={mail} />
-                    <section>
-                        <button onClick={() => onRemoveMail(mail.id)}>Remove</button>
-                    </section>
-                </tr>
-            )}
-        </tbody>
-
+                {emails.map(mail =>
+                    <tr className='email-row' key={mail.id}>
+                        <MailPreview mail={mail} onRemoveMail={onRemoveMail} />
+                    </tr>
+                )}
+            </tbody>
+        </table>
     )
 }

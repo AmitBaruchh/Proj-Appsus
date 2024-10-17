@@ -1,7 +1,6 @@
 import { mailService } from "../services/mail.service.js"
 
-
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onRemoveMail }) {
 
     function onReadMail({ target }) {
         let value = target.value
@@ -16,6 +15,8 @@ export function MailPreview({ mail }) {
             <td><span>{mail.subject}</span></td>
             <td><span>{mail.body}</span></td>
             <td><span>{mailService.formatTime(mail.sentAt)}</span></td>
+            <td class="email-action"><span><button class="action-button" onClick={() => onRemoveMail(mail.id)}>Remove</button></span></td>
+            {/* <td class="email-action"><span><button class="action-button" onClick={() => onRemoveMail(mail.id)}>Remove</button></span></td> */}
         </React.Fragment>
     )
 }

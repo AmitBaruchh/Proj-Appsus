@@ -5,6 +5,7 @@ import { mailService } from "../services/mail.service.js"
 export function MailCompose() {
     const sectionRef = useRef()
     const [newMail, setNewMail] = useState(mailService.getEmptyMail())
+    // const isClicked = false
 
     useEffect(() => {
         sectionRef.current.classList.add('hide')
@@ -46,8 +47,11 @@ export function MailCompose() {
     }
 
     return (
-        <React.Fragment>
-            <button onClick={onCompose}>Compose</button>
+        <section className='mail-compose'>
+            <button className='compose-button' onClick={onCompose}><span class="material-symbols-outlined">
+                edit
+            </span>Compose</button>
+
             <section className='new-message-form hide' ref={sectionRef}>
                 <h2>new message </h2>
                 <form className='add-form' onSubmit={onSendMail}>
@@ -65,7 +69,6 @@ export function MailCompose() {
                 </form>
             </section>
 
-        </React.Fragment>
-
+        </section>
     )
 } 

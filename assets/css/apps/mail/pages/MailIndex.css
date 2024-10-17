@@ -1,1 +1,90 @@
- /* mail index  */
+/* Main App Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mail-index {
+    display: flex;
+    background-color: #ffffff;
+}
+
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    background-color: #f6f8fc;
+    padding-right: 20px;
+    height: 100vh;
+}
+
+.filter-list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.header {
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header input {
+    margin-left: 20px;
+    width: 60%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+.inbox {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.inbox ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.inbox li {
+    display: flex;
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.inbox li:hover {
+    background-color: #f5f5f5;
+}
+
+.inbox li .email-snippet {
+    color: #666;
+    font-size: 14px;
+}
+
+.material-symbols-outlined {
+    margin: 10px;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}

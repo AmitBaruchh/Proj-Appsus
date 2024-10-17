@@ -1,0 +1,32 @@
+/* .mail-folder-list ul li {
+    list-style: none;
+    padding-left: 0;
+}
+
+.mail-folder-list ul {
+    list-style: none;
+    padding-left: 10px;
+    margin: 0;
+} */
+
+.mail-folder-list {
+    margin-top: 6px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    padding: 5px;
+    font-size: 0.87rem;
+}
+
+.side-icon {
+    margin: 0;
+}
+
+.categories:active {
+    background-color: #d3e3fd;
+}

@@ -1,1 +1,47 @@
  /* mail list */
+
+ .mail-table {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     border-collapse: collapse;
+     border-spacing: 2px;
+     margin: 20px auto;
+ }
+
+ tbody {
+     display: flex;
+     flex-direction: column;
+     border: 0.6px solid #e0e0e0;
+ }
+
+ .mail-list,
+ .email-row {
+     display: flex;
+     border-top: 0.6px solid #e0e0e0;
+     /* padding: 10px; */
+     font-size: .875rem;
+ }
+
+ td {
+     padding: 9px;
+ }
+
+ .email-row:hover {
+     box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+     z-index: 2;
+ }
+
+ .email-row {
+     cursor: pointer;
+ }
+
+ .email-action {
+     display: none;
+     width: 10%;
+     text-align: center;
+ }
+
+ .email-row:hover .email-action {
+     display: flex;
+ }

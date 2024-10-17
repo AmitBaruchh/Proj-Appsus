@@ -3,6 +3,8 @@ const { useEffect, useState } = React
 import { MailList } from "../cmps/MailList.jsx"
 import { MailCompose } from "../cmps/MailCompose.jsx"
 import { mailService } from "../services/mail.service.js"
+import { MailFolderList } from '../cmps/MailFolderList.jsx'
+import { MailFilter } from '../cmps/MailFilter.jsx'
 
 export function MailIndex() {
 
@@ -38,17 +40,21 @@ export function MailIndex() {
 
 
     if (!emails || !emails.length) return <div>Loading...</div>
-    return (<section className="mail-index">
-        <table>
-            <MailCompose />
+    return (
+        <section className="mail-index">
+            <section className='side-bar'>
+                <MailCompose />
+                <MailFolderList />
+            </section>
 
-            <MailList
-                emails={emails}
-                onRemoveMail={onRemoveMail}
-            />
-        </table>
-
-
-    </section>)
+            <section className='filter-list-container'>
+                <MailFilter />
+                <MailList
+                    emails={emails}
+                    onRemoveMail={onRemoveMail}
+                />
+            </section>
+        </section>
+    )
 }
 
