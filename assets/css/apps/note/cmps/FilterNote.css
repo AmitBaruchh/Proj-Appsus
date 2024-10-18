@@ -22,9 +22,15 @@
 .note-filter input {
     border: none;
     background-color: inherit;
-    outline: none; 
-    width: 100%; 
-    font-size: 16px; 
-    padding-left: 40px; 
-    color: #5f6368; 
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 40px;
+    color: #5f6368;
+}
+
+@media (max-width: 550px) {
+    .note-filter {
+        z-index: -1;
+    }
 }
