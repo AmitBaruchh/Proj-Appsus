@@ -1,5 +1,10 @@
 const { Link } = ReactRouterDOM
 
+import { NoteTxt } from '../cmps/NoteTxt.jsx'
+import { NoteImg } from '../cmps/NoteImg.jsx'
+import { NoteTodos } from '../cmps/NoteTodos.jsx'
+import { NoteVideo } from '../cmps/NoteVideo.jsx'
+
 export function NotePreview({
     note,
     onRemoveNote,
@@ -62,51 +67,4 @@ function DynamicCmp(props) {
         default:
             return null
     }
-}
-
-function NoteTxt({ note }) {
-    return (
-        <div>
-            {note.info.title && <h3>{note.info.title}</h3>}
-            <p>{note.info.txt}</p>
-        </div>
-    )
-}
-
-function NoteImg({ note }) {
-    return (
-        <div>
-            {note.info.title && <h3>{note.info.title}</h3>}
-            <img src={note.info.url} alt={note.info.title} />
-        </div>
-    )
-}
-
-function NoteTodos({ note, onToggleTodo }) {
-    return (
-        <div className="todo-note">
-            {note.info.title && <h3>{note.info.title}</h3>}
-
-            <ul>
-                {note.info.todos.map((todo, idx) => (
-                    <li key={idx}>
-                        <input type="checkbox" checked={!!todo.doneAt} onChange={() => onToggleTodo(note, idx)} />
-                        {todo.txt}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
-
-function NoteVideo({ note }) {
-    return (
-        <div>
-            {note.info.title && <h3>{note.info.title}</h3>}
-            <video width="240" height="160ש" controls>
-                <source src={note.info.url} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    )
 }
