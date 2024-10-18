@@ -6,12 +6,12 @@ export function AppHeader() {
 
     function onToggleMenu() {
         setIsMenuOpen(!isMenuOpen)
-    }
 
-    if (isMenuOpen) {
-        document.body.style.paddingTop = '240px'
-    } else {
-        document.body.style.paddingTop = '100px'
+        if (!isMenuOpen) {
+            document.body.classList.add('menu-open')
+        } else {
+            document.body.classList.remove('menu-open')
+        }
     }
 
     return (

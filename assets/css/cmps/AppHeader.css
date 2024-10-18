@@ -29,6 +29,11 @@ nav a.active {
     text-decoration: overline;
 }
 
+body {
+    padding-top: 100px;
+    transition: padding-top 1s ease-in-out;
+}
+
 .btn-toggle-menu {
     display: none;
 }
@@ -75,6 +80,11 @@ nav a.active {
         display: block;
     }
 
+    body.menu-open {
+        padding-top: 240px;
+        transition: padding-top 1s ease-in-out;
+    }
+
     .main-nav {
         display: grid;
         position: fixed;
@@ -90,10 +100,6 @@ nav a.active {
 
     .main-nav.menu-open {
         max-height: 180px;
-    }
-
-    body {
-        transition: padding-top 1s ease-in-out;
     }
 
     .main-nav a {
