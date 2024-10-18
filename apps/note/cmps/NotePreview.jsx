@@ -20,7 +20,7 @@ export function NotePreview({
         const newColor = event.target.value
         onChangeBgnColorNote(note, newColor)
     }
-
+    const pinnedClass = note.isPinned ? 'pinned' : ''
     return (
         <article className="note-preview" style={{ backgroundColor: bgColor }}>
             <Link to={`/note/edit/${note.id}`}>
@@ -28,7 +28,10 @@ export function NotePreview({
             </Link>
 
             <section className="action-btns">
-                <span className="material-symbols-outlined pin-note-btn" onClick={() => onTogglePinNote(note)}>
+                <span
+                    className={`material-symbols-outlined pin-note-btn ${pinnedClass}`}
+                    onClick={() => onTogglePinNote(note)}
+                >
                     keep
                 </span>
                 <span className="material-icons-outlined remove-note-btn" onClick={() => onRemoveNote(note)}>
