@@ -1,13 +1,10 @@
-/* note preview */
-
 .note-preview {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    max-width: 250px;
+    padding: 10px;
     transition: box-shadow 0.3s ease;
+    width: 240px;
 }
 
 .note-preview:hover {
@@ -58,13 +55,13 @@
 }
 
 .note-preview .todo-note li {
+    width: calc(100% - 20px);
     margin-left: 5px;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 590px) {
     .note-preview {
         width: calc(100% - 40px);
         margin: 10px auto;
-        max-width: none;
     }
 }

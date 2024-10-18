@@ -15,11 +15,11 @@
     line-height: 1rem;
     text-transform: uppercase;
     margin: 32px 32px 8px;
-    padding: 0 6.25em;
+    padding: 0 2.5em;
     font-weight: bold;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 590px) {
     .note-index .note-section-title {
         padding: 0 1em;
     }
