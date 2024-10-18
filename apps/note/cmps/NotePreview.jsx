@@ -27,21 +27,32 @@ export function NotePreview({
                 <DynamicCmp note={note} onToggleTodo={onToggleTodo} />
             </Link>
 
+            <span
+                className={`material-symbols-outlined pin-note-btn ${pinnedClass}`}
+                onClick={() => onTogglePinNote(note)}
+                title={note.isPinned ? 'Unpin note' : 'Pin note'}
+            >
+                keep
+            </span>
             <section className="action-btns">
                 <span
-                    className={`material-symbols-outlined pin-note-btn ${pinnedClass}`}
-                    onClick={() => onTogglePinNote(note)}
+                    className="material-icons-outlined remove-note-btn"
+                    onClick={() => onRemoveNote(note)}
+                    title="Delete note"
                 >
-                    keep
-                </span>
-                <span className="material-icons-outlined remove-note-btn" onClick={() => onRemoveNote(note)}>
                     delete
                 </span>
-                <span className="material-icons-outlined duplicate-note-btn" onClick={() => onDuplicateNote(note)}>
+                <span
+                    className="material-icons-outlined duplicate-note-btn"
+                    onClick={() => onDuplicateNote(note)}
+                    title="Duplicate note"
+                >
                     file_copy
                 </span>
                 <label htmlFor={`fillColor-${note.id}`}>
-                    <span className="material-icons-outlined bgn-color-note-btn">palette</span>
+                    <span className="material-icons-outlined bgn-color-note-btn" title="Change background color">
+                        palette
+                    </span>
                 </label>
                 <input
                     type="color"

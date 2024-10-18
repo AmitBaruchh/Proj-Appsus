@@ -5,10 +5,16 @@
     padding: 10px;
     transition: box-shadow 0.3s ease;
     width: 240px;
+    position: relative;
 }
 
 .note-preview:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.note-preview h3 {
+    margin-bottom: 7px;
+    max-width: 205px;
 }
 
 .note-preview img {
@@ -26,18 +32,40 @@
     opacity: 0;
     border: none;
     background-color: inherit;
+    width: 32px;
+    height: 32px;
     font-size: 26px;
     font-weight: bold;
     cursor: pointer;
     position: relative;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+}
+
+.note-preview .pin-note-btn {
+    display: block;
+    opacity: 0;
+    font-size: 32px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background-size: 24px 24px;
+    height: 32px;
+    width: 32px;
 }
 
 .material-symbols-outlined.pin-note-btn.pinned {
     font-variation-settings: 'FILL' 1;
 }
 
-.note-preview:hover .action-btns {
-    opacity: 1;
+.note-preview:hover .action-btns,
+.note-preview:hover .pin-note-btn {
+    color: #202124;
+    opacity: 0.71;
 }
 
 .bgn-color-note-btn {
