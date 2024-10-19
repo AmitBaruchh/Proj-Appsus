@@ -32,6 +32,11 @@ export function MailIndex() {
             })
     }
 
+    function onNewMailAdded(newMail) {
+        setEmails(emails => [newMail, ...emails])
+    }
+
+
 
 
     // function onSetFilterBy(filterBy) {
@@ -43,7 +48,7 @@ export function MailIndex() {
     return (
         <section className="mail-index">
             <section className='side-bar'>
-                <MailCompose />
+                <MailCompose onNewMailAdded={onNewMailAdded} />
                 <MailFolderList />
             </section>
 
