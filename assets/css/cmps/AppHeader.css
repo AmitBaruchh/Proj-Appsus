@@ -14,6 +14,13 @@ header {
     margin-bottom: 20px;
 }
 
+.app-header h3 {
+    font-family: ConcertOne-Regular;
+    font-size: 26px;
+    letter-spacing: 0.3em;
+    margin-left: 10px;
+}
+
 nav a {
     margin: 0.5em;
     margin-right: 20px;

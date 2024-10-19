@@ -4,3 +4,10 @@
     font-family: Lato-Light;
     src: url(../../fonts/Lato-Light.ttf);
 }
+
+/* ConcertOne-Regular */
+
+@font-face {
+    font-family: ConcertOne-Regular;
+    src: url(../../fonts/ConcertOne-Regular.ttf);
+}
