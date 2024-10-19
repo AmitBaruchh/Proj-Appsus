@@ -1,10 +1,44 @@
-const { useState } = React
+const { useState, useEffect, useRef } = React
 
 import { mailService } from "../services/mail.service.js"
+import { useAutoSaveDraft } from "../hooks/useAutoSaveDraft.jsx"
 
 export function MailCompose({ onNewMailAdded }) {
+
     const [newMail, setNewMail] = useState(mailService.getEmptyMail())
+
     const [isFormVisible, setIsFormVisible] = useState(false)
+
+    useAutoSaveDraft(isFormVisible, newMail, saveDraft);
+
+    function saveDraft() {
+        // Skip saving empty drafts
+        if (!newMail.to && !newMail.subject && !newMail.body) return
+
+        if (newMail.id) {
+            mailService.saveDraft(newMail)
+                .then(() => {
+                    console.log('Draft updated successfully')
+                })
+                .catch(err => {
+                    console.error('Failed to update draft:', err)
+                })
+
+        } else {
+            mailService.saveDraft(newMail)
+                .then((savedMail) => {
+                    // Set the newly created mail with the draft ID
+                    setNewMail(savedMail)
+                    console.log('Draft saved successfully')
+
+                })
+                .catch(err => {
+                    console.error('Failed to save draft:', err)
+                })
+
+        }
+    }
+
 
     function onCompose() {
         setIsFormVisible(isFormVisible => !isFormVisible)
@@ -12,16 +46,17 @@ export function MailCompose({ onNewMailAdded }) {
 
     function onSendMail(ev) {
         ev.preventDefault()
-        mailService.save(newMail)
+        mailService.removeDraft(newMail.id)
+        mailService.saveMail(newMail)
             .then((newMail) => {
                 onNewMailAdded(newMail)
-                setNewMail(mailService.getEmptyMail()) // Reset the form after submission
                 setIsFormVisible(false)
+                console.log('newMail ', newMail);
+                setNewMail(mailService.getEmptyMail())
             })
             .catch(err => {
                 console.log('err:', err)
             })
-        loadMails()
     }
 
     function handleChange({ target }) {
@@ -39,6 +74,7 @@ export function MailCompose({ onNewMailAdded }) {
                 break
         }
         setNewMail(prevMails => ({ ...prevMails, [field]: value }))
+
     }
 
     function onCloseForm() {
