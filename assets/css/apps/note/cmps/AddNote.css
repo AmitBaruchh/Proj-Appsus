@@ -36,13 +36,15 @@
     gap: 8px;
 }
 
-.add-note-btns .material-icons-outlined {
+.add-note-btns .material-icons-outlined,
+.add-note-btns .material-symbols-outlined {
     cursor: pointer;
     padding: 8px;
     color: #5f6368;
 }
 
-.add-note-btns .material-icons-outlined:hover {
+.add-note-btns .material-icons-outlined:hover,
+.add-note-btns .material-symbols-outlined:hover {
     color: #202124;
 }
 

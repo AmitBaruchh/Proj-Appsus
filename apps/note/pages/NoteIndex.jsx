@@ -17,7 +17,7 @@ export function NoteIndex() {
     useEffect(() => {
         setSearchParams(getTruthyValues(filterBy))
         loadNotes()
-    }, [filterBy, notes])
+    }, [filterBy])
 
     function loadNotes() {
         noteService

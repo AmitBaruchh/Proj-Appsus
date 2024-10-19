@@ -4,6 +4,7 @@ import { NoteTxt } from '../cmps/NoteTxt.jsx'
 import { NoteImg } from '../cmps/NoteImg.jsx'
 import { NoteTodos } from '../cmps/NoteTodos.jsx'
 import { NoteVideo } from '../cmps/NoteVideo.jsx'
+import { NoteCanvas } from '../cmps/NoteCanvas.jsx'
 
 export function NotePreview({
     note,
@@ -24,7 +25,7 @@ export function NotePreview({
     return (
         <article className="note-preview" style={{ backgroundColor: bgColor }}>
             <Link to={`/note/edit/${note.id}`}>
-                <DynamicCmp note={note} onToggleTodo={onToggleTodo} />
+                <DynamicCmp note={note} onToggleTodo={onToggleTodo} readOnly={true} />
             </Link>
 
             <span
@@ -78,6 +79,8 @@ function DynamicCmp(props) {
             return <NoteTodos {...props} />
         case 'NoteVideo':
             return <NoteVideo {...props} />
+        case 'NoteCanvas':
+            return <NoteCanvas {...props} />
         default:
             return null
     }

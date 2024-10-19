@@ -12,7 +12,9 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.note-preview h3 {
+.note-preview h3,
+.canvas-note h3 {
+    margin: 0;
     margin-bottom: 7px;
     max-width: 205px;
 }
@@ -90,6 +92,49 @@
 .note-preview video {
     width: 100%;
     height: auto;
+}
+
+.canvas-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.canvas-container {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #000;
+    background-color: #f9f9f9;
+}
+
+.canvas-note {
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-btns {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.canvas-btns span {
+    background-color: inherit;
+    border: none;
+    color: black;
+    font-size: 24px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.canvas-btns span:hover {
+    background-color: #f5f4f4;
+    color: #202124;
 }
 
 @media (max-width: 590px) {

@@ -61,7 +61,7 @@ function getFilterFromSearchParams(searchParams) {
 }
 
 function getDefaultFilter() {
-       return { search: '' }
+    return { search: '' }
 }
 
 function _createNotes() {
@@ -348,6 +348,18 @@ function _createNotes() {
                 },
                 style: {
                     backgroundColor: '#B39DDB',
+                },
+            },
+            {
+                id: 'n120',
+                createdAt: 1112234,
+                type: 'NoteCanvas',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#f4f4f4',
+                },
+                info: {
+                    title: 'Canvas Note',
                 },
             },
         ]

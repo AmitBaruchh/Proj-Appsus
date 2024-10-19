@@ -1,4 +1,5 @@
 const { useState } = React
+import { NoteCanvas } from '../cmps/NoteCanvas.jsx'
 
 export function AddNote({ onAddNote }) {
     const [isExpanded, setIsExpanded] = useState(false)
@@ -8,6 +9,7 @@ export function AddNote({ onAddNote }) {
     const [todos, setTodos] = useState([''])
     const [noteImgUrl, setNoteImgUrl] = useState('')
     const [noteVideoUrl, setNoteVideoUrl] = useState('')
+    const [canvasDataUrl, setCanvasDataUrl] = useState('')
 
     function handleTxtInputChange(ev) {
         setNoteTxt(ev.target.value)
@@ -32,6 +34,11 @@ export function AddNote({ onAddNote }) {
         setNoteType('NoteVideo')
     }
 
+    function handleAddCanvas() {
+        setIsExpanded(true)
+        setNoteType('NoteCanvas')
+    }
+
     function handleExpand() {
         setIsExpanded(true)
     }
@@ -53,36 +60,49 @@ export function AddNote({ onAddNote }) {
         setNoteVideoUrl(ev.target.value)
     }
 
+    function handleSaveCanvas(dataURL) {
+        setCanvasDataUrl(dataURL)
+    }
+
     function handleSubmit(ev) {
         ev.preventDefault()
+        let newNote = {}
 
-        if (
-            !noteTitle.trim() &&
-            !noteTxt.trim() &&
-            todos.every(todo => !todo.trim()) &&
-            !noteImgUrl.trim() &&
-            !noteVideoUrl.trim()
-        ) {
-            setIsExpanded(false)
-            setNoteTitle('')
-            setNoteTxt('')
-            setTodos([''])
-            setNoteType('NoteTxt')
-            return
-        }
-        const newNote = {
-            type: noteType,
-            info:
-                noteType === 'NoteTxt'
-                    ? { title: noteTitle, txt: noteTxt }
-                    : noteType === 'NoteTodos'
-                    ? {
-                          title: noteTitle,
-                          todos: todos.filter(todo => todo.trim()).map(todo => ({ txt: todo, doneAt: null })),
-                      }
-                    : noteType === 'NoteImg'
-                    ? { title: noteTitle, url: noteImgUrl }
-                    : { title: noteTitle, url: noteVideoUrl },
+        if (noteType === 'NoteCanvas') {
+            newNote = {
+                type: noteType,
+                info: {
+                    title: noteTitle,
+                    url: canvasDataUrl,
+                },
+            }
+        } else {
+            if (
+                !(
+                    !noteTitle.trim() &&
+                    !noteTxt.trim() &&
+                    todos.every(todo => !todo.trim()) &&
+                    !noteImgUrl.trim() &&
+                    !noteVideoUrl.trim()
+                )
+            ) {
+                newNote = {
+                    type: noteType,
+                    info:
+                        noteType === 'NoteTxt'
+                            ? { title: noteTitle, txt: noteTxt }
+                            : noteType === 'NoteTodos'
+                            ? {
+                                  title: noteTitle,
+                                  todos: todos.filter(todo => todo.trim()).map(todo => ({ txt: todo, doneAt: null })),
+                              }
+                            : noteType === 'NoteImg'
+                            ? { title: noteTitle, url: noteImgUrl }
+                            : noteType === 'NoteVideo'
+                            ? { title: noteTitle, url: noteVideoUrl }
+                            : { title: noteTitle },
+                }
+            }
         }
         onAddNote(newNote)
         setNoteTitle('')
@@ -111,6 +131,9 @@ export function AddNote({ onAddNote }) {
                         </span>
                         <span className="material-icons-outlined video-note-btn" onClick={handleAddVideo}>
                             videocam
+                        </span>
+                        <span className="material-symbols-outlined" onClick={handleAddCanvas}>
+                            draw
                         </span>
                     </section>
                 </div>
@@ -164,6 +187,12 @@ export function AddNote({ onAddNote }) {
                             onChange={handleVideoUrlChange}
                             className="note-video-url-input"
                         />
+                    )}
+                    {noteType === 'NoteCanvas' && (
+                        <div>
+                            <p>Draw on the canvas:</p>
+                            <NoteCanvas readOnly={false} noteTitle={noteTitle} onSaveCanvas={handleSaveCanvas} />
+                        </div>
                     )}
                     <div className="close-btn-container">
                         <button className="close-new-note-btn" type="submit">
