@@ -19,12 +19,16 @@
  .email-row {
      display: flex;
      border-top: 0.6px solid #e0e0e0;
-     /* padding: 10px; */
      font-size: .875rem;
+     color: #666;
  }
 
  td {
      padding: 9px;
+ }
+
+ .info {
+     min-width: 168px;
  }
 
  .email-row:hover {
@@ -44,4 +48,13 @@
 
  .email-row:hover .email-action {
      display: flex;
+ }
+
+ .email-row:hover .row-mail-list {
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .row-mail-list {
+     width: 100%;
  }

@@ -4,24 +4,24 @@ export function MailFolderList() {
     return (
         <div className="mail-folder-list">
             <div className='categories'>
-                <span class="material-symbols-outlined side-icon">inbox</span>
-                <span>Inbox</span>
+                <i class="material-symbols-outlined side-icon">inbox</i>
+                <i>Inbox</i>
             </div>
             <div className='categories'>
-                <span class="material-symbols-outlined side-icon">star</span>
-                <span>Starred</span>
+                <i class="material-symbols-outlined side-icon">star</i>
+                <i>Starred</i>
             </div>
             <div className='categories'>
-                <span class="material-symbols-outlined side-icon">send</span>
-                <span>Sent</span>
+                <i class="material-symbols-outlined side-icon">send</i>
+                <i>Sent</i>
             </div>
             <div className='categories'>
-                <span class="material-symbols-outlined side-icon">draft</span>
-                <span>Drafts</span>
+                <i class="material-symbols-outlined side-icon">draft</i>
+                <i>Drafts</i>
             </div>
             <div className='categories'>
-                <span class="material-symbols-outlined side-icon">delete</span>
-                <span>Trash</span>
+                <i class="material-symbols-outlined side-icon">delete</i>
+                <i>Trash</i>
             </div>
         </div>
     )

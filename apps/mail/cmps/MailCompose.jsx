@@ -1,33 +1,28 @@
-const { useRef, useState, useEffect } = React
+const { useState } = React
 
 import { mailService } from "../services/mail.service.js"
 
-export function MailCompose() {
-    const sectionRef = useRef()
+export function MailCompose({ onNewMailAdded }) {
     const [newMail, setNewMail] = useState(mailService.getEmptyMail())
-    // const isClicked = false
-
-    useEffect(() => {
-        sectionRef.current.classList.add('hide')
-    }, [])
+    const [isFormVisible, setIsFormVisible] = useState(false)
 
     function onCompose() {
-        // console.log(sectionRef)
-        sectionRef.current.classList.remove('hide')
-
+        setIsFormVisible(isFormVisible => !isFormVisible)
     }
 
     function onSendMail(ev) {
         ev.preventDefault()
         mailService.save(newMail)
-            .then(setNewMail)
+            .then((newMail) => {
+                onNewMailAdded(newMail)
+                setNewMail(mailService.getEmptyMail()) // Reset the form after submission
+                setIsFormVisible(false)
+            })
             .catch(err => {
                 console.log('err:', err)
-            }).then(
-                sectionRef.current.classList.add('hide')
-            )
+            })
+        loadMails()
     }
-
 
     function handleChange({ target }) {
         const field = target.name
@@ -46,29 +41,49 @@ export function MailCompose() {
         setNewMail(prevMails => ({ ...prevMails, [field]: value }))
     }
 
+    function onCloseForm() {
+        setIsFormVisible(false)
+    }
+
     return (
         <section className='mail-compose'>
-            <button className='compose-button' onClick={onCompose}><span class="material-symbols-outlined">
+            <button className='compose-button' onClick={onCompose}><i className="material-symbols-outlined icon">
                 edit
-            </span>Compose</button>
+            </i>Compose</button>
+            {isFormVisible && (
+                <section className='new-message-form'>
+                    <section className='header'>
+                        <h2>New Message</h2>
+                        <i className="material-symbols-outlined icon close-icon" onClick={onCloseForm} >close</i>
+                    </section>
+                    <form className='add-form' onSubmit={onSendMail}>
+                        <label htmlFor="to">To:</label>
+                        <input value={newMail.to} onChange={handleChange} type="text" name="to" id="to" placeholder="To" />
 
-            <section className='new-message-form hide' ref={sectionRef}>
-                <h2>new message </h2>
-                <form className='add-form' onSubmit={onSendMail}>
+                        <label htmlFor="subject">Subject:</label>
+                        <input value={newMail.subject} onChange={handleChange} type="text" name="subject" id="subject" placeholder="Subject" />
 
-                    <label htmlFor="to">to:</label>
-                    <input value={newMail.to} onChange={handleChange} type="text" name="to" id="to" />
+                        <label htmlFor="body">Body:</label>
+                        <textarea value={newMail.body} onChange={handleChange} name="body" id="body" placeholder="Write your message here..."></textarea>
 
-                    <label htmlFor="subject">subject:</label>
-                    <input type="text" onChange={handleChange} name="subject" id="subject" />
+                        {/* <label htmlFor="body">Body:</label>
+                        <input className='body-input' value={newMail.body} onChange={handleChange} type="text" name="body" id="body" placeholder="Write your message here..." /> */}
 
-                    <label htmlFor="body">body:</label>
-                    <input type="text" onChange={handleChange} name="body" id="body" placeholder="Write your message here..." />
 
-                    <button>Send</button>
-                </form>
-            </section>
-
+                        <div className="toolbar">
+                            <div className="actions">
+                                <button type="submit">Send</button>
+                            </div>
+                            <div className="icons">
+                                <i className="material-symbols-outlined icon">attach_file</i>
+                                <i className="material-symbols-outlined icon">insert_link</i>
+                                <i className="material-symbols-outlined icon">mood</i>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            )}
         </section>
+
     )
 } 
