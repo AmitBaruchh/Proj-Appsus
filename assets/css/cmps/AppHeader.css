@@ -1,6 +1,6 @@
 header {
-    background: #d9e5fa;
-    border-bottom: 2px solid white;
+    background: #b8c7ce;
+    border-bottom: 2px solid #d6d3c4;
     position: fixed;
     top: 0;
     width: 100%;
@@ -19,19 +19,21 @@ header {
     font-size: 26px;
     letter-spacing: 0.3em;
     margin-left: 10px;
+    color: #516f75;
 }
 
 nav a {
     margin: 0.5em;
     margin-right: 20px;
+    color: #42a0a8;
 }
 
 nav a:active {
-    color: purple;
+    color: #6f8587;
 }
 
 nav a.active {
-    color: darkblue;
+    color: #516f75;
     font-weight: bold;
     text-decoration: overline;
 }
@@ -65,7 +67,7 @@ body {
     height: 4px;
     width: 100%;
     transition: 0.4s;
-    background-color: black;
+    background-color: #516f75;
 }
 
 .app-header.menu-open .btn-toggle-menu .hamburger-lines .line.line1 {
