@@ -31,6 +31,7 @@
 
 @media (max-width: 550px) {
     .note-filter {
+        max-width: 400px;
         z-index: -1;
     }
 }

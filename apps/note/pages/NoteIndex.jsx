@@ -37,6 +37,8 @@ export function NoteIndex() {
     }
 
     function onAddNote(newNote) {
+        if (!newNote) return
+
         noteService.save(newNote).then(savedNote => {
             setNotes(prevNotes => [...prevNotes, savedNote])
         })
@@ -97,7 +99,12 @@ export function NoteIndex() {
     return (
         <section className="note-index">
             <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-            <AddNote onAddNote={onAddNote} />
+            <AddNote
+                onAddNote={onAddNote}
+                onRemoveNote={onRemoveNote}
+                onDuplicateNote={onDuplicateNote}
+                onChangeBgnColorNote={onChangeBgnColorNote}
+            />
             <h3 className="note-section-title">PINNED</h3>
             <NoteList
                 notes={pinnedNotes}

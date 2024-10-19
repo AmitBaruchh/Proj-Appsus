@@ -34,9 +34,7 @@
     opacity: 0;
     border: none;
     background-color: inherit;
-    width: 32px;
-    height: 32px;
-    font-size: 26px;
+
     font-weight: bold;
     cursor: pointer;
     position: relative;
@@ -59,6 +57,16 @@
     height: 32px;
     width: 32px;
 }
+.action-btns span {
+    width: 32px;
+    height: 32px;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    color: #202124;
+}
 
 .material-symbols-outlined.pin-note-btn.pinned {
     font-variation-settings: 'FILL' 1;
@@ -68,6 +76,12 @@
 .note-preview:hover .pin-note-btn {
     color: #202124;
     opacity: 0.71;
+}
+
+.action-btns span:hover,
+.pin-note-btn:hover {
+    background-color: rgba(60, 64, 67, 0.205);
+    border-radius: 50%;
 }
 
 .bgn-color-note-btn {
@@ -95,11 +109,11 @@
 }
 
 .canvas-note {
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
 }
 
 .canvas-container {
@@ -109,13 +123,6 @@
     background-color: #f9f9f9;
 }
 
-.canvas-note {
-    padding:0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .canvas-btns {
     margin-top: 10px;
     display: flex;
@@ -123,18 +130,24 @@
 }
 
 .canvas-btns span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
     background-color: inherit;
     border: none;
-    color: black;
+    color: #202124;
+    align-items: center;
     font-size: 24px;
-    padding: 8px 16px;
-    border-radius: 5px;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
 
 .canvas-btns span:hover {
-    background-color: #f5f4f4;
-    color: #202124;
+    background-color: rgba(60, 64, 67, 0.205);
+    border-radius: 50%;
 }
 
 @media (max-width: 590px) {
