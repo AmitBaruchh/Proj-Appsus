@@ -36,9 +36,6 @@ export function MailIndex() {
         setEmails(emails => [newMail, ...emails])
     }
 
-
-
-
     // function onSetFilterBy(filterBy) {
     //     setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
     // }

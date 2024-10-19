@@ -70,13 +70,6 @@ function _createMails() {
     }
 }
 
-// function _createMail(subject, isRead) {
-
-//     const mail = getEmptyMail(subject, isRead)
-//     mail.id = 
-//     return mail
-// }
-
 function formatTime(timestamp) {
     const currentTime = Date.now();
     const timeDifference = currentTime - timestamp;
