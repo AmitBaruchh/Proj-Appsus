@@ -1,0 +1,134 @@
+.book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+}
+.book-details h1 {
+    font-size: 2em;
+}
+.book-details h3 {
+    font-size: 1.8em;
+}
+
+.book-details-titles {
+    width: 100%;
+    margin: 0 0 10px 0;
+    text-align: center;
+    color: var(--clr1);
+}
+
+.book-details h4 {
+    color: var(--clr2);
+    margin: 0;
+    font-weight: bold;
+}
+.book-details h5 {
+    color: var(--clr2);
+    margin: 0;
+    font-weight: bold;
+}
+
+.book-details-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-details img {
+    max-width: 200px;
+    align-self: flex-start;
+}
+
+.book-details-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.book-details-buttons button,
+.back-button-container button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    background-color: var(--clr2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.back-button-container button {
+    background-color: var(--clr1);
+}
+
+.book-details-buttons button:hover {
+    background-color: var(--clr2bg);
+}
+
+.back-button-container button:hover {
+    background-color: var(--clr1bg);
+}
+
+.price-red {
+    color: red !important;
+}
+
+.price-green {
+    color: green !important;
+}
+
+.book-details nav a {
+    display: inline-block;
+    background-color: var(--clr1);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    text-align: center;
+}
+
+.book-details nav a:hover {
+    background-color: var(--clr1bg);
+}
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 1em;
+}
+
+.review-table th,
+.review-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.review-table th {
+    background-color: var(--clr1);
+    color: white;
+    font-weight: bold;
+}
+
+.review-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.review-table tr:hover {
+    background-color: #ddd;
+}
+
+.review-table td {
+    padding: 8px;
+    color: var(--clr2);
+}

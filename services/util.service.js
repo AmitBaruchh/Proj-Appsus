@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    debounce,
 }
 
 export function makeId(length = 4) {
@@ -113,4 +114,14 @@ export function getTruthyValues(obj) {
         }
     }
     return newObj
+}
+
+function debounce(func, wait = 300) {
+    let timeout
+    return (...args) => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            func(...args)
+        }, wait)
+    }
 }

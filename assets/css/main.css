@@ -31,8 +31,17 @@
 @import './apps/note/cmps/NoteEdit.css';
 
 /* Mail  */
-
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/MailFilter.css';
 @import './apps/mail/cmps/MailCompose.css';
 @import './apps/mail/cmps/MailFolderList.css';
+
+/* Book */
+@import './apps/book/cmps/book-list.css';
+@import './apps/book/cmps/book-preview.css';
+@import './apps/book/cmps/book-filter.css';
+@import './apps/book/pages/book-details.css';
+@import './apps/book/pages/book-edit.css';
+@import './apps/book/cmps/add-review.css';
+@import './apps/book/cmps/add-google-book.css';
+@import './apps/book/cmps/chart.css';

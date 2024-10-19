@@ -1,0 +1,70 @@
+.add-google-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-google-book label {
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.add-google-book input[type='text'] {
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.google-search-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.google-search-list li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: var(--gray2);
+}
+
+.google-search-list button {
+    background-color: #81b383;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.google-search-list button:hover {
+    background-color: #45a049;
+}
+
+.add-google-book p {
+    margin-top: 10px;
+    color: var(--gray3);
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+}

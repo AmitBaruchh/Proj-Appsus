@@ -26,3 +26,17 @@ img {
     width: 100%;
     object-fit: cover;
 }
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr 1.6rem;
+    margin: 0 auto;
+}
+
+.main-layout > * {
+    grid-column: 2;
+}
+
+.main-layout .full {
+    grid-column: 1/-1;
+}
