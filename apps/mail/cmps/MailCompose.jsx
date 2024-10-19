@@ -10,9 +10,6 @@ export function MailCompose({ onNewMailAdded }) {
         setIsFormVisible(isFormVisible => !isFormVisible)
     }
 
-
-
-
     function onSendMail(ev) {
         ev.preventDefault()
         mailService.save(newMail)

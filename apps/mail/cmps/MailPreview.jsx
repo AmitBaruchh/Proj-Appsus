@@ -21,8 +21,6 @@ export function MailPreview({ mail, onRemoveMail }) {
                 <td><i class="material-symbols-outlined side-icon" onClick={() => onRemoveMail(mail.id)}>archive</i></td>
                 {/* <td class="email-action"><span><button class="action-button" onClick={() => onRemoveMail(mail.id)}>Remove</button></span></td> */}
             </section>
-
-
         </section>
     )
 }

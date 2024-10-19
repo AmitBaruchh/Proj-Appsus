@@ -40,7 +40,6 @@ export function MailIndex() {
     //     setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
     // }
 
-
     if (!emails || !emails.length) return <div>Loading...</div>
     return (
         <section className="mail-index">
