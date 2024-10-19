@@ -22,6 +22,8 @@
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
 @import './cmps/NotFound.css';
+@import './cmps/About.css';
+@import './cmps/Accordion.css';
 
 /* Note */
 @import './apps/note/cmps/NoteList.css';

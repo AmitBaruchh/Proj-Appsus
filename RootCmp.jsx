@@ -10,6 +10,7 @@ import { BookIndex } from './apps/book/pages/BookIndex.jsx'
 import { NotFound } from './cmps/NotFound.jsx'
 import { NoteEdit } from './apps/note/cmps/NoteEdit.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
+import { Team } from './cmps/Team.jsx'
 
 export function App() {
     return (
@@ -20,7 +21,9 @@ export function App() {
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<Home />} />
-                        <Route path="/about" element={<About />} />
+                        <Route path="/about" element={<About />}>
+                            <Route path="/about/team" element={<Team />} />
+                        </Route>
                         <Route path="/mail" element={<MailIndex />} />
                         <Route path="/book" element={<BookIndex />} />
 
