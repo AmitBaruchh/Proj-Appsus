@@ -27,6 +27,16 @@ export const mailService = {
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
+        .then(mails => {
+            if (filterBy.subject) {
+                const regExp = new RegExp(filterBy.subject, 'i')
+                mails = mails.filter(mail => regExp.test(mail.subject))
+            }
+            if (filterBy.isRead) {
+                mails = mails.filter(mail => mail.isRead = filterBy.isRead)
+            }
+            return mails
+        })
 }
 
 function get(mailId) {
@@ -107,7 +117,7 @@ function formatTime(timestamp) {
     }
 }
 
-function _generateMockMails(count) {
+function _getRandomSubject() {
     const subjects = [
         'New jobs posted from careers.sapiens.com',
         'Meeting Tomorrow',
@@ -131,18 +141,23 @@ function _generateMockMails(count) {
         'Exclusive Event for Members',
         'System Maintenance Notification'
     ]
+    return subjects[Math.floor(Math.random() * subjects.length)]
+}
+
+function _generateMockMails(count) {
 
 
     const mockMails = [];
 
     for (let i = 0; i < count; i++) {
         const from = _getRandomEmail()
-        const subject = subjects[Math.floor(Math.random() * subjects.length)]
+        const subject = _getRandomSubject()
         const isRead = Math.random() > 0.5 // Randomize isRead status
         const mail = getEmptyMail(subject, from, isRead)
-        mail.id = makeId()
         let sentAt = _getRandomDate()
-        mail.sentAt = sentAt
+
+        mail.id = makeId()
+        mail.sentAt = formatTime(sentAt)
         mockMails.push(mail)
     }
 

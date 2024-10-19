@@ -9,13 +9,18 @@ import { MailFilter } from '../cmps/MailFilter.jsx'
 export function MailIndex() {
 
     const [emails, setEmails] = useState(null)
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
 
     useEffect(() => {
         loadMails()
-    }, [])
+        console.log(emails)
+
+
+    }, [filterBy])
 
     function loadMails() {
-        mailService.query()
+        console.log(filterBy);
+        mailService.query(filterBy)
             .then(setEmails)
             .catch(err => {
                 console.log('problems getting mails:', err)
@@ -36,9 +41,9 @@ export function MailIndex() {
         setEmails(emails => [newMail, ...emails])
     }
 
-    // function onSetFilterBy(filterBy) {
-    //     setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
-    // }
+    function onSetFilterBy(filterBy) {
+        setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
+    }
 
     if (!emails || !emails.length) return <div>Loading...</div>
     return (
@@ -49,7 +54,7 @@ export function MailIndex() {
             </section>
 
             <section className='filter-list-container'>
-                <MailFilter />
+                <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
                 <MailList
                     emails={emails}
                     onRemoveMail={onRemoveMail}
