@@ -1,4 +1,6 @@
 import { NoteCanvas } from '../cmps/NoteCanvas.jsx'
+import { showErrorMsg, showSuccessMsg, showUserMsg } from '../../../services/event-bus.service.js'
+
 const { useState } = React
 
 export function AddNote({ onAddNote }) {
@@ -99,7 +101,7 @@ export function AddNote({ onAddNote }) {
         ev.preventDefault()
 
         if (isNoteEmpty()) {
-            alert('Cannot add an empty note!')
+            showErrorMsg('Cannot add an empty note!')
             onAddNote(null)
             setIsExpanded(false)
 
@@ -140,6 +142,7 @@ export function AddNote({ onAddNote }) {
         }
 
         onAddNote(newNote)
+        showUserMsg('Note has been added successfully!')
         resetNote()
     }
 

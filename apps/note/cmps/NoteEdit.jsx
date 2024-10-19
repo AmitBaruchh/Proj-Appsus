@@ -1,5 +1,6 @@
 import { noteService } from '../services/note.service.js'
 import { NoteCanvas } from './NoteCanvas.jsx'
+import { showErrorMsg, showSuccessMsg, showUserMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouterDOM
@@ -39,9 +40,16 @@ export function NoteEdit() {
         if (note.type === 'NoteCanvas' && canvasDataURL) {
             note.info.url = canvasDataURL
         }
-        noteService.save(note).then(() => {
-            navigate('/note?updated=true')
-        })
+        noteService
+            .save(note)
+            .then(() => {
+                navigate('/note?updated=true')
+                showSuccessMsg('Note saved successfully!')
+            })
+            .catch(err => {
+                console.log('Error saving note', err)
+                showErrorMsg('Failed to save note')
+            })
     }
 
     if (!note) return <div>Loading...</div>

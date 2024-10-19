@@ -5,6 +5,7 @@ import { NoteImg } from '../cmps/NoteImg.jsx'
 import { NoteTodos } from '../cmps/NoteTodos.jsx'
 import { NoteVideo } from '../cmps/NoteVideo.jsx'
 import { NoteCanvas } from '../cmps/NoteCanvas.jsx'
+import { showErrorMsg, showSuccessMsg, showUserMsg } from '../../../services/event-bus.service.js'
 
 export function NotePreview({
     note,
@@ -20,8 +21,11 @@ export function NotePreview({
     function handleColorChange(event) {
         const newColor = event.target.value
         onChangeBgnColorNote(note, newColor)
+        showSuccessMsg('Background color updated!')
     }
+
     const pinnedClass = note.isPinned ? 'pinned' : ''
+
     return (
         <article className="note-preview" style={{ backgroundColor: bgColor }}>
             <Link to={`/note/edit/${note.id}`}>
