@@ -5,10 +5,11 @@ import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { getTruthyValues } from '../../../services/util.service.js'
 
 const { useState, useEffect } = React
-const { Outlet, useSearchParams } = ReactRouterDOM
+const { Outlet, useSearchParams, useNavigate } = ReactRouterDOM
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const navigate = useNavigate()
 
     const [searchParams, setSearchParams] = useSearchParams(true)
     const defaultFilter = noteService.getFilterFromSearchParams(searchParams)
@@ -18,6 +19,13 @@ export function NoteIndex() {
         setSearchParams(getTruthyValues(filterBy))
         loadNotes()
     }, [filterBy])
+
+    useEffect(() => {
+        if (searchParams.get('updated')) {
+            loadNotes()
+            navigate('/note')
+        }
+    }, [searchParams])
 
     function loadNotes() {
         noteService

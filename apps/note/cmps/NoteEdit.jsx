@@ -40,7 +40,7 @@ export function NoteEdit() {
             note.info.url = canvasDataURL
         }
         noteService.save(note).then(() => {
-            navigate('/note')
+            navigate('/note?updated=true')
         })
     }
 
