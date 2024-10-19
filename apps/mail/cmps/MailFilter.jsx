@@ -25,6 +25,11 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
+    const handleIsReadChange = (ev) => {
+        const newIsRead = ev.target.value
+        onSetFilterBy({ isRead: newIsRead === '' ? '' : newIsRead === 'true' })
+    }
+
     const { subject, isRead } = filterBy
 
     return (
@@ -34,7 +39,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                 <input value={subject || ""} onChange={handleChange} name="subject" className='mail-input' type="text" placeholder="Search mail" />
                 <i className="material-symbols-outlined icon">tune</i>
             </section>
-            <select value={""} onChange={handleChange}>
+            <select value={isRead || ""} onChange={handleIsReadChange}>
                 <option value="">All</option>
                 <option value="true">Read</option>
                 <option value="false">Unread</option>

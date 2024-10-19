@@ -33,7 +33,7 @@ function query(filterBy = {}) {
                 mails = mails.filter(mail => regExp.test(mail.subject))
             }
             if (filterBy.isRead) {
-                mails = mails.filter(mail => mail.isRead = filterBy.isRead)
+                mails = mails.filter(mail => mail.isRead === true)
             }
             return mails
         })
