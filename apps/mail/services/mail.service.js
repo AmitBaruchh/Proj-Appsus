@@ -3,6 +3,8 @@ import { makeId } from "../../../services/util.service.js"
 import { loadFromStorage, saveToStorage } from "../../../services/storage.service.js"
 
 const MAIL_KEY = 'mailDB'
+const TRASH_KEY = 'trashDB'
+const DRAFT_KEY = 'draftDB'
 
 const loggedInUser = {
     email: 'user@appsus.com',
@@ -15,10 +17,12 @@ export const mailService = {
     query,
     get,
     remove,
-    save,
+    saveMail,
     getEmptyMail,
     getDefaultFilter,
-    formatTime
+    formatTime,
+    saveDraft,
+    removeDraft
 }
 
 function query(filterBy = {}) {
@@ -34,12 +38,23 @@ function remove(mailId) {
     return storageService.remove(MAIL_KEY, mailId)
 }
 
-function save(mail) {
+function saveMail(mail) {
+    return storageService.post(MAIL_KEY, mail)
+}
+
+function saveDraft(mail) {
     if (mail.id) {
-        return storageService.put(MAIL_KEY, mail)
+        return storageService.put(DRAFT_KEY, mail)
     } else {
-        return storageService.post(MAIL_KEY, mail)
+        return storageService.post(DRAFT_KEY, mail)
     }
+
+}
+
+
+function removeDraft(mailId) {
+    if (mailId)
+        return storageService.remove(DRAFT_KEY, mailId)
 }
 
 function getEmptyMail(subject, from = 'user@appsus.com', isRead) {
