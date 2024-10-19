@@ -1,53 +1,35 @@
-/* home */
 .home {
     text-align: center;
     font-family: 'Arial', sans-serif;
 }
 
 .main-header {
-    /* Modern sans-serif font */
     font-size: 2.5rem;
-    /* Larger font size for emphasis */
     color: #333;
-    /* Dark gray color for text */
     margin-bottom: 20px;
-    /* Space below header */
 }
 
 .description {
-    /* Serif font for readability */
     font-size: 1.2rem;
-    /* Slightly larger text */
     color: #555;
-    /* Medium gray for better contrast */
     line-height: 1.6;
-    /* Improved readability with line height */
     margin: 0 auto;
-    /* Center the paragraph */
     max-width: 600px;
-    /* Max width for better text alignment */
 }
 
 .icons {
     margin-top: 30px;
-    /* Space above icons */
     display: flex;
-    /* Flexbox for icon layout */
     justify-content: center;
-    /* Center icons in the section */
     gap: 15px;
-    /* Space between icons */
 }
 
-/* Responsive design adjustments */
 @media (max-width: 600px) {
     .main-header {
         font-size: 2rem;
-        /* Smaller header on mobile */
     }
 
     .description {
         font-size: 1rem;
-        /* Smaller description on mobile */
     }
 }
