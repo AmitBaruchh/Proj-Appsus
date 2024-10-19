@@ -1,10 +1,14 @@
 import { noteService } from '../services/note.service.js'
+import { NoteCanvas } from './NoteCanvas.jsx'
+import { showErrorMsg, showSuccessMsg, showUserMsg } from '../../../services/event-bus.service.js'
+
 const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
 export function NoteEdit() {
     const { noteId } = useParams()
     const [note, setNote] = useState(null)
+    const [canvasDataURL, setCanvasDataURL] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,10 +32,24 @@ export function NoteEdit() {
         setNote(prevNote => ({ ...prevNote, info: { ...prevNote.info, todos: newTodos } }))
     }
 
+    function handleSaveCanvas(dataURL) {
+        setCanvasDataURL(dataURL)
+    }
+
     function onSaveNote() {
-        noteService.save(note).then(() => {
-            navigate('/note')
-        })
+        if (note.type === 'NoteCanvas' && canvasDataURL) {
+            note.info.url = canvasDataURL
+        }
+        noteService
+            .save(note)
+            .then(() => {
+                navigate('/note?updated=true')
+                showSuccessMsg('Note saved successfully!')
+            })
+            .catch(err => {
+                console.log('Error saving note', err)
+                showErrorMsg('Failed to save note')
+            })
     }
 
     if (!note) return <div>Loading...</div>
@@ -70,8 +88,19 @@ export function NoteEdit() {
                             ))}
                         </ul>
                     )}
+                    {note.type === 'NoteCanvas' && (
+                        <div>
+                            <NoteCanvas note={note} readOnly={false} onSaveCanvas={handleSaveCanvas} />
+                        </div>
+                    )}
 
-                    <button onClick={onSaveNote}>Close</button>
+                    <button
+                        className="close-edit-modal"
+                        onClick={onSaveNote}
+                        title={note.type === 'NoteCanvas' ? "Don't forget to save before closing" : 'Close'}
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </section>

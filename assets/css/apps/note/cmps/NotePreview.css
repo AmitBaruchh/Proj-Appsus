@@ -1,17 +1,22 @@
-/* note preview */
-
 .note-preview {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    max-width: 250px;
+    padding: 10px;
     transition: box-shadow 0.3s ease;
+    width: 240px;
+    position: relative;
 }
 
 .note-preview:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.note-preview h3,
+.canvas-note h3 {
+    margin: 0;
+    margin-bottom: 7px;
+    max-width: 205px;
 }
 
 .note-preview img {
@@ -29,18 +34,54 @@
     opacity: 0;
     border: none;
     background-color: inherit;
-    font-size: 26px;
+
     font-weight: bold;
     cursor: pointer;
     position: relative;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
 }
 
-.material-symbols-outlined.pin-note-btn {
+.note-preview .pin-note-btn {
+    display: block;
+    opacity: 0;
+    font-size: 32px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background-size: 24px 24px;
+    height: 32px;
+    width: 32px;
+}
+.action-btns span {
+    width: 32px;
+    height: 32px;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    color: #202124;
+}
+
+.material-symbols-outlined.pin-note-btn.pinned {
     font-variation-settings: 'FILL' 1;
 }
 
-.note-preview:hover .action-btns {
-    opacity: 1;
+.note-preview:hover .action-btns,
+.note-preview:hover .pin-note-btn {
+    color: #202124;
+    opacity: 0.71;
+}
+
+.action-btns span:hover,
+.pin-note-btn:hover {
+    background-color: rgba(60, 64, 67, 0.205);
+    border-radius: 50%;
 }
 
 .bgn-color-note-btn {
@@ -58,13 +99,60 @@
 }
 
 .note-preview .todo-note li {
+    width: calc(100% - 20px);
     margin-left: 5px;
 }
 
-@media (max-width: 550px) {
+.note-preview video {
+    width: 100%;
+    height: auto;
+}
+
+.canvas-note {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas-container {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #000;
+    background-color: #f9f9f9;
+}
+
+.canvas-btns {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.canvas-btns span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-color: inherit;
+    border: none;
+    color: #202124;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.canvas-btns span:hover {
+    background-color: rgba(60, 64, 67, 0.205);
+    border-radius: 50%;
+}
+
+@media (max-width: 590px) {
     .note-preview {
         width: calc(100% - 40px);
         margin: 10px auto;
-        max-width: none;
     }
 }

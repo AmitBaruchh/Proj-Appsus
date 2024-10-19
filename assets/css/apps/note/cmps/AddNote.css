@@ -5,6 +5,7 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.616);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
@@ -13,10 +14,10 @@
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.25rem;
+    position: relative;
 }
 
 .note-input-wrapper {
-    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
@@ -29,7 +30,6 @@
     border-radius: 8px;
     font-size: 16px;
     outline: none;
-    box-sizing: border-box;
 }
 
 .add-note-btns {
@@ -37,13 +37,15 @@
     gap: 8px;
 }
 
-.add-note-btns .material-icons-outlined {
+.add-note-btns .material-icons-outlined,
+.add-note-btns .material-symbols-outlined {
     cursor: pointer;
     padding: 8px;
     color: #5f6368;
 }
 
-.add-note-btns .material-icons-outlined:hover {
+.add-note-btns .material-icons-outlined:hover,
+.add-note-btns .material-symbols-outlined:hover {
     color: #202124;
 }
 
@@ -53,7 +55,6 @@
     font-size: 16px;
     border: none;
     outline: none;
-    box-sizing: border-box;
     margin-bottom: 8px;
     border-radius: 8px;
 }
@@ -66,7 +67,6 @@
     font-size: 16px;
     border: none;
     outline: none;
-    box-sizing: border-box;
     border-radius: 8px;
 }
 
@@ -112,7 +112,8 @@
 .close-new-note-btn {
     background-color: inherit;
     border: none;
-    color: black;
+    color: #202124;
+
     font-size: 14px;
     padding: 8px 16px;
     border-radius: 5px;
@@ -122,4 +123,59 @@
 .close-new-note-btn:hover {
     background-color: #f5f4f4;
     color: #202124;
+}
+
+.add-note-form .action-btns {
+    opacity: 0.71;
+    border: none;
+    background-color: inherit;
+    width: 32px;
+    height: 32px;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: #202124;
+    width: auto;
+}
+.add-note-form .action-btns span {
+    cursor: pointer;
+}
+
+.add-note-form .action-btns span:hover {
+    background-color: rgba(60, 64, 67, 0.205);
+    border-radius: 50%;
+}
+
+.add-note-form .pin-note-btn {
+    display: block;
+    opacity: 1;
+    font-size: 32px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #202124;
+    cursor: pointer;
+    background-size: 24px 24px;
+    height: 32px;
+    width: 32px;
+}
+
+.add-note-form .pin-note-btn:hover {
+    background-color: rgba(60, 64, 67, 0.205);
+    border-radius: 50%;
+}
+
+.material-symbols-outlined.pin-note-btn.pinned {
+    font-variation-settings: 'FILL' 1;
+}
+
+@media (max-width: 550px) {
+    .add-note-form {
+        max-width: 400px;
+    }
 }

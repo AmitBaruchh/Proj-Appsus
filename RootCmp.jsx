@@ -8,24 +8,28 @@ import { MailIndex } from './apps/mail/pages/MailIndex.jsx'
 import { NoteIndex } from './apps/note/pages/NoteIndex.jsx'
 import { NotFound } from './cmps/NotFound.jsx'
 import { NoteEdit } from './apps/note/cmps/NoteEdit.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 export function App() {
     return (
         <Router>
             <section className="app">
                 <AppHeader />
-                <Routes>
-                    <Route path="/" element={<Navigate to="/home" />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/mail" element={<MailIndex />} />
+                <main className="main-layout">
+                    <Routes>
+                        <Route path="/" element={<Navigate to="/home" />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/mail" element={<MailIndex />} />
 
-                    <Route path="/note" element={<NoteIndex />}>
-                        <Route path="edit/:noteId" element={<NoteEdit />} />
-                    </Route>
+                        <Route path="/note" element={<NoteIndex />}>
+                            <Route path="edit/:noteId" element={<NoteEdit />} />
+                        </Route>
 
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </main>
+                <UserMsg />
             </section>
         </Router>
     )

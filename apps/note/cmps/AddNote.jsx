@@ -1,3 +1,6 @@
+import { NoteCanvas } from '../cmps/NoteCanvas.jsx'
+import { showErrorMsg, showSuccessMsg, showUserMsg } from '../../../services/event-bus.service.js'
+
 const { useState } = React
 
 export function AddNote({ onAddNote }) {
@@ -8,6 +11,9 @@ export function AddNote({ onAddNote }) {
     const [todos, setTodos] = useState([''])
     const [noteImgUrl, setNoteImgUrl] = useState('')
     const [noteVideoUrl, setNoteVideoUrl] = useState('')
+    const [canvasDataUrl, setCanvasDataUrl] = useState('')
+    const [bgColor, setBgColor] = useState('white')
+    const [isPinned, setIsPinned] = useState(false)
 
     function handleTxtInputChange(ev) {
         setNoteTxt(ev.target.value)
@@ -32,6 +38,11 @@ export function AddNote({ onAddNote }) {
         setNoteType('NoteVideo')
     }
 
+    function handleAddCanvas() {
+        setIsExpanded(true)
+        setNoteType('NoteCanvas')
+    }
+
     function handleExpand() {
         setIsExpanded(true)
     }
@@ -53,47 +64,90 @@ export function AddNote({ onAddNote }) {
         setNoteVideoUrl(ev.target.value)
     }
 
-    function handleSubmit(ev) {
-        ev.preventDefault()
+    function handleSaveCanvas(dataURL) {
+        setCanvasDataUrl(dataURL)
+    }
 
-        if (
+    function handleBgColorChange(ev) {
+        setBgColor(ev.target.value)
+    }
+
+    function togglePin() {
+        setIsPinned(!isPinned)
+    }
+
+    function isNoteEmpty() {
+        return (
             !noteTitle.trim() &&
             !noteTxt.trim() &&
             todos.every(todo => !todo.trim()) &&
             !noteImgUrl.trim() &&
-            !noteVideoUrl.trim()
-        ) {
-            setIsExpanded(false)
-            setNoteTitle('')
-            setNoteTxt('')
-            setTodos([''])
-            setNoteType('NoteTxt')
-            return
-        }
-        const newNote = {
-            type: noteType,
-            info:
-                noteType === 'NoteTxt'
-                    ? { title: noteTitle, txt: noteTxt }
-                    : noteType === 'NoteTodos'
-                    ? {
-                          title: noteTitle,
-                          todos: todos.filter(todo => todo.trim()).map(todo => ({ txt: todo, doneAt: null })),
-                      }
-                    : noteType === 'NoteImg'
-                    ? { title: noteTitle, url: noteImgUrl }
-                    : { title: noteTitle, url: noteVideoUrl },
-        }
-        onAddNote(newNote)
+            !noteVideoUrl.trim() &&
+            !canvasDataUrl.trim()
+        )
+    }
+
+    function resetNote() {
         setNoteTitle('')
         setNoteTxt('')
         setTodos([''])
+        setBgColor('white')
+        setIsPinned(false)
         setIsExpanded(false)
         setNoteType('NoteTxt')
     }
 
+    function handleSubmit(ev) {
+        ev.preventDefault()
+
+        if (isNoteEmpty()) {
+            showErrorMsg('Cannot add an empty note!')
+            onAddNote(null)
+            setIsExpanded(false)
+
+            return
+        }
+
+        let newNote = {}
+
+        if (noteType === 'NoteCanvas') {
+            newNote = {
+                type: noteType,
+                info: {
+                    title: noteTitle,
+                    url: canvasDataUrl,
+                },
+                style: { backgroundColor: bgColor },
+                isPinned: isPinned,
+            }
+        } else {
+            newNote = {
+                type: noteType,
+                info:
+                    noteType === 'NoteTxt'
+                        ? { title: noteTitle, txt: noteTxt }
+                        : noteType === 'NoteTodos'
+                        ? {
+                              title: noteTitle,
+                              todos: todos.filter(todo => todo.trim()).map(todo => ({ txt: todo, doneAt: null })),
+                          }
+                        : noteType === 'NoteImg'
+                        ? { title: noteTitle, url: noteImgUrl }
+                        : noteType === 'NoteVideo'
+                        ? { title: noteTitle, url: noteVideoUrl }
+                        : { title: noteTitle },
+                style: { backgroundColor: bgColor },
+                isPinned: isPinned,
+            }
+        }
+
+        onAddNote(newNote)
+        showUserMsg('Note has been added successfully!')
+        resetNote()
+    }
+
     return (
-        <form onSubmit={handleSubmit} className="add-note-form">
+        <form onSubmit={handleSubmit} className="add-note-form" style={{ backgroundColor: bgColor }}>
             {!isExpanded && (
                 <div className="note-input-wrapper">
                     <input
@@ -101,6 +155,7 @@ export function AddNote({ onAddNote }) {
                         placeholder="Take a note..."
                         onClick={handleExpand}
                         className="note-input-collapsed"
+                        style={{ backgroundColor: bgColor }}
                     />
                     <section className="add-note-btns">
                         <span className="material-icons-outlined todo-list-btn" onClick={handleAddTodo}>
@@ -111,6 +166,9 @@ export function AddNote({ onAddNote }) {
                         </span>
                         <span className="material-icons-outlined video-note-btn" onClick={handleAddVideo}>
                             videocam
+                        </span>
+                        <span className="material-symbols-outlined" onClick={handleAddCanvas}>
+                            draw
                         </span>
                     </section>
                 </div>
@@ -123,6 +181,7 @@ export function AddNote({ onAddNote }) {
                         value={noteTitle}
                         onChange={handleTitleInputChange}
                         className="note-title-input"
+                        style={{ backgroundColor: bgColor }}
                     />
                     {noteType === 'NoteTxt' && (
                         <input
@@ -131,6 +190,7 @@ export function AddNote({ onAddNote }) {
                             value={noteTxt}
                             onChange={handleTxtInputChange}
                             className="note-text-input"
+                            style={{ backgroundColor: bgColor }}
                         />
                     )}
                     {noteType === 'NoteTodos' && (
@@ -142,6 +202,7 @@ export function AddNote({ onAddNote }) {
                                         placeholder={'+ List item'}
                                         value={todo}
                                         onChange={ev => handleTodoChange(ev, idx)}
+                                        style={{ backgroundColor: bgColor }}
                                     />
                                 </li>
                             ))}
@@ -154,6 +215,7 @@ export function AddNote({ onAddNote }) {
                             value={noteVideoUrl}
                             onChange={handleImgUrlChange}
                             className="note-img-url-input"
+                            style={{ backgroundColor: bgColor }}
                         />
                     )}
                     {noteType === 'NoteVideo' && (
@@ -163,8 +225,46 @@ export function AddNote({ onAddNote }) {
                             value={noteVideoUrl}
                             onChange={handleVideoUrlChange}
                             className="note-video-url-input"
+                            style={{ backgroundColor: bgColor }}
                         />
                     )}
+                    {noteType === 'NoteCanvas' && (
+                        <div>
+                            <p>Draw on the canvas:</p>
+                            <NoteCanvas readOnly={false} noteTitle={noteTitle} onSaveCanvas={handleSaveCanvas} />
+                        </div>
+                    )}
+                    <span
+                        className={`material-symbols-outlined pin-note-btn ${isPinned ? 'pinned' : ''}`}
+                        onClick={togglePin}
+                        title={isPinned ? 'Unpin note' : 'Pin note'}
+                    >
+                        keep
+                    </span>
+                    <section className="action-btns">
+                        <label>
+                            <span
+                                className="material-icons-outlined bgn-color-note-btn"
+                                title="Change background color"
+                            >
+                                palette
+                            </span>
+                            <input
+                                type="color"
+                                value={bgColor}
+                                onChange={handleBgColorChange}
+                                style={{ display: 'none' }}
+                            />
+                        </label>
+                        <span
+                            className="material-icons-outlined remove-note-btn"
+                            onClick={resetNote}
+                            title="Delete note"
+                        >
+                            delete
+                        </span>
+                    </section>
+
                     <div className="close-btn-container">
                         <button className="close-new-note-btn" type="submit">
                             Close

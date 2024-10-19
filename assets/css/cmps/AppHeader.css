@@ -1,17 +1,29 @@
 header {
     background: #d9e5fa;
     border-bottom: 2px solid white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
     padding: 20px 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.app-header h3 {
+    font-family: ConcertOne-Regular;
+    font-size: 26px;
+    letter-spacing: 0.3em;
+    margin-left: 10px;
 }
 
 nav a {
     margin: 0.5em;
+    margin-right: 20px;
 }
 
 nav a:active {
@@ -22,4 +34,93 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+}
+
+body {
+    padding-top: 100px;
+    transition: padding-top 1s ease-in-out;
+}
+
+.btn-toggle-menu {
+    display: none;
+}
+
+.app-header .btn-toggle-menu {
+    background-color: inherit;
+    border: 0;
+    width: 50px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.app-header .btn-toggle-menu .hamburger-lines {
+    height: 31px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.app-header .btn-toggle-menu .hamburger-lines .line {
+    height: 4px;
+    width: 100%;
+    transition: 0.4s;
+    background-color: black;
+}
+
+.app-header.menu-open .btn-toggle-menu .hamburger-lines .line.line1 {
+    rotate: -45deg;
+    transform-origin: top right;
+}
+
+.app-header.menu-open .btn-toggle-menu .hamburger-lines .line.line2 {
+    scale: 0;
+}
+
+.app-header.menu-open .btn-toggle-menu .hamburger-lines .line.line3 {
+    rotate: 45deg;
+    transform-origin: bottom right;
+}
+
+@media (max-width: 550px) {
+    .btn-toggle-menu {
+        display: block;
+    }
+
+    body.menu-open {
+        padding-top: 240px;
+        transition: padding-top 1s ease-in-out;
+    }
+
+    .main-nav {
+        display: grid;
+        position: fixed;
+        background-color: inherit;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 2s ease;
+    }
+
+    .main-nav.menu-open {
+        max-height: 180px;
+    }
+
+    .main-nav a {
+        display: block;
+        width: 100%;
+        padding: 5px 0;
+        text-align: center;
+    }
+
+    nav a.active {
+        color: darkblue;
+        font-weight: bold;
+        text-decoration: none;
+
+        border-top: 1px solid darkblue;
+    }
 }
